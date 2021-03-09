@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WDHotLineVC">
+            <connections>
+                <outlet property="contentLab" destination="Yih-Dx-PkJ" id="4dg-aj-Chf"/>
+                <outlet property="imgView" destination="uCg-ih-Ca0" id="ltO-Nq-UJk"/>
+                <outlet property="leftStack" destination="K5K-o5-cbQ" id="7g9-cg-S1w"/>
+                <outlet property="middleStack" destination="DDF-M7-xy9" id="UaZ-Va-NPl"/>
+                <outlet property="rightStack" destination="Odg-DJ-j0Z" id="BYd-8q-KhW"/>
+                <outlet property="userLab" destination="4aY-H6-e9z" id="wv1-GF-hvj"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNV-1Y-WaQ">
+                    <rect key="frame" x="40" y="104" width="334" height="460"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uCg-ih-Ca0">
+                            <rect key="frame" x="117" y="50" width="100" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="uCg-ih-Ca0" secondAttribute="height" multiplier="1:1" id="IuE-e9-gIn"/>
+                                <constraint firstAttribute="height" constant="100" id="lsc-wu-cVf"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="李白" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aY-H6-e9z">
+                            <rect key="frame" x="149.5" y="232" width="35" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请您接听文学热线" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yih-Dx-PkJ">
+                            <rect key="frame" x="98" y="262.5" width="138" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.3411764706" green="0.3411764706" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K5K-o5-cbQ">
+                            <rect key="frame" x="102" y="340.5" width="30" height="24"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takePhone_connect" translatesAutoresizingMaskIntoConstraints="NO" id="kal-XY-mDc">
+                                    <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takePhone_left" translatesAutoresizingMaskIntoConstraints="NO" id="ata-Yg-RUi">
+                                    <rect key="frame" x="24" y="0.0" width="6" height="24"/>
+                                </imageView>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Odg-DJ-j0Z">
+                            <rect key="frame" x="198.5" y="337" width="37.5" height="31.5"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takePhone_left" translatesAutoresizingMaskIntoConstraints="NO" id="iyf-L6-FUh">
+                                    <rect key="frame" x="0.0" y="0.0" width="6" height="31.5"/>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takePhone_dropped" translatesAutoresizingMaskIntoConstraints="NO" id="nJe-mf-s6t">
+                                    <rect key="frame" x="6" y="0.0" width="31.5" height="31.5"/>
+                                </imageView>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DDF-M7-xy9">
+                            <rect key="frame" x="148.5" y="337" width="37.5" height="31.5"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takePhone_voice_left" translatesAutoresizingMaskIntoConstraints="NO" id="pGd-Zs-x5q">
+                                    <rect key="frame" x="0.0" y="0.0" width="3" height="31.5"/>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takePhone_dropped" translatesAutoresizingMaskIntoConstraints="NO" id="Mqd-nu-Igl">
+                                    <rect key="frame" x="3" y="0.0" width="31.5" height="31.5"/>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takePhone_voice_right" translatesAutoresizingMaskIntoConstraints="NO" id="87b-Lw-0WN">
+                                    <rect key="frame" x="34.5" y="0.0" width="3" height="31.5"/>
+                                </imageView>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="uCg-ih-Ca0" firstAttribute="centerX" secondItem="pNV-1Y-WaQ" secondAttribute="centerX" id="Fd9-Ba-UOi"/>
+                        <constraint firstItem="Odg-DJ-j0Z" firstAttribute="centerX" secondItem="pNV-1Y-WaQ" secondAttribute="centerX" constant="50" id="JPF-Fo-TYs"/>
+                        <constraint firstItem="Yih-Dx-PkJ" firstAttribute="top" secondItem="4aY-H6-e9z" secondAttribute="bottom" constant="10" id="P6v-jx-PWO"/>
+                        <constraint firstAttribute="width" secondItem="pNV-1Y-WaQ" secondAttribute="height" multiplier="297:409" id="Q2g-M3-dAv"/>
+                        <constraint firstItem="uCg-ih-Ca0" firstAttribute="top" secondItem="pNV-1Y-WaQ" secondAttribute="top" constant="50" id="SCa-Vb-EVW"/>
+                        <constraint firstItem="Yih-Dx-PkJ" firstAttribute="centerX" secondItem="4aY-H6-e9z" secondAttribute="centerX" id="SmP-Ld-tor"/>
+                        <constraint firstItem="K5K-o5-cbQ" firstAttribute="top" secondItem="Yih-Dx-PkJ" secondAttribute="bottom" constant="60" id="TU4-89-ds1"/>
+                        <constraint firstItem="4aY-H6-e9z" firstAttribute="centerX" secondItem="uCg-ih-Ca0" secondAttribute="centerX" id="ax0-Jh-d3V"/>
+                        <constraint firstItem="DDF-M7-xy9" firstAttribute="centerX" secondItem="pNV-1Y-WaQ" secondAttribute="centerX" id="bb7-OD-E6O"/>
+                        <constraint firstItem="4aY-H6-e9z" firstAttribute="top" secondItem="uCg-ih-Ca0" secondAttribute="bottom" constant="82" id="e0I-Yy-zGQ"/>
+                        <constraint firstItem="Odg-DJ-j0Z" firstAttribute="centerY" secondItem="K5K-o5-cbQ" secondAttribute="centerY" id="jXu-pC-ndd"/>
+                        <constraint firstItem="DDF-M7-xy9" firstAttribute="centerY" secondItem="K5K-o5-cbQ" secondAttribute="centerY" id="m6F-6d-kfZ"/>
+                        <constraint firstItem="K5K-o5-cbQ" firstAttribute="centerX" secondItem="pNV-1Y-WaQ" secondAttribute="centerX" constant="-50" id="rhs-ks-trN"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="pNV-1Y-WaQ" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="60" id="HkJ-Kn-XOa"/>
+                <constraint firstItem="pNV-1Y-WaQ" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="40" id="h5W-MK-9fq"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="pNV-1Y-WaQ" secondAttribute="trailing" constant="40" id="pCG-Pb-ZyG"/>
+            </constraints>
+            <point key="canvasLocation" x="41" y="70"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="takePhone_connect" width="24" height="24"/>
+        <image name="takePhone_dropped" width="31.5" height="31.5"/>
+        <image name="takePhone_left" width="6" height="3.5"/>
+        <image name="takePhone_voice_left" width="3" height="4"/>
+        <image name="takePhone_voice_right" width="3" height="4"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

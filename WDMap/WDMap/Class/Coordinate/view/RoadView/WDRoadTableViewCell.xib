@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="WDRoadTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="road_detail_tag" translatesAutoresizingMaskIntoConstraints="NO" id="fdn-c6-KtH">
+                        <rect key="frame" x="30" y="14.5" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="E5I-jJ-LdL"/>
+                            <constraint firstAttribute="height" constant="15" id="iUJ-wQ-BaL"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="唐宋名篇线" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ec-IF-jcr">
+                        <rect key="frame" x="55" y="14" width="66.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coordinate_play" translatesAutoresizingMaskIntoConstraints="NO" id="qnl-48-qFl">
+                        <rect key="frame" x="279.5" y="16" width="10.5" height="12"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="3Ec-IF-jcr" firstAttribute="centerY" secondItem="fdn-c6-KtH" secondAttribute="centerY" id="1cY-59-UQv"/>
+                    <constraint firstItem="3Ec-IF-jcr" firstAttribute="leading" secondItem="fdn-c6-KtH" secondAttribute="trailing" constant="10" id="9Bg-NY-0hM"/>
+                    <constraint firstItem="qnl-48-qFl" firstAttribute="centerY" secondItem="3Ec-IF-jcr" secondAttribute="centerY" id="AbQ-ZL-MY3"/>
+                    <constraint firstItem="fdn-c6-KtH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="Fh2-wF-ucl"/>
+                    <constraint firstAttribute="trailing" secondItem="qnl-48-qFl" secondAttribute="trailing" constant="30" id="RXr-Kt-bui"/>
+                    <constraint firstItem="fdn-c6-KtH" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="b3K-FG-BB8"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="titleLab" destination="3Ec-IF-jcr" id="C0W-6t-XgL"/>
+            </connections>
+            <point key="canvasLocation" x="80" y="96"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="coordinate_play" width="10.5" height="12"/>
+        <image name="road_detail_tag" width="12" height="12"/>
+    </resources>
+</document>

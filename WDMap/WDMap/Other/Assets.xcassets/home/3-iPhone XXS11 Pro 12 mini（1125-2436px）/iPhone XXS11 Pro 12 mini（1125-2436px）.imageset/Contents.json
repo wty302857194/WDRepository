@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "iPhone XXS11 Pro 12 mini（1125-2436px）.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

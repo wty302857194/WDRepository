@@ -1,0 +1,101 @@
+
+(
+{
+    color = "#fdae49";
+    id = 52;
+    "img_url" = "https://wxdtoss.oss-cn-beijing.aliyuncs.com/upload/202010/17/202010170038349386.png";
+    "parent_id" = 0;
+    scale = 10;
+    title = "\U6587\U5b66\U666f\U89c2";
+},
+{
+    color = "#f1a782";
+    id = 53;
+    "img_url" = "https://wxdtoss.oss-cn-beijing.aliyuncs.com/upload/202010/17/202010170041076153.png";
+    "parent_id" = 0;
+    scale = 2;
+    title = "\U6545\U5c45/\U7eaa\U5ff5\U9986";
+},
+{
+    childrendata =             (
+    {
+        color = "";
+        id = 55;
+        "img_url" = "https://wxdtoss.oss-cn-beijing.aliyuncs.com/upload/202010/17/202010170046567276.png";
+        "parent_id" = 54;
+        scale = 0;
+        title = "\U6587\U5b66\U7ec4\U7ec7";
+    },
+    {
+        color = "";
+        id = 56;
+        "img_url" = "https://wxdtoss.oss-cn-beijing.aliyuncs.com/upload/202010/17/202010170048181153.png";
+        "parent_id" = 54;
+        scale = 0;
+        title = "\U51fa\U7248\U673a\U6784";
+    },
+    {
+        color = "";
+        id = 69;
+        "img_url" = "https://wxdtoss.oss-cn-beijing.aliyuncs.com/upload/202010/17/202010170050191358.png";
+        "parent_id" = 54;
+        scale = 0;
+        title = "\U7814\U7a76\U673a\U6784";
+    },
+    {
+        color = "";
+        id = 70;
+        "img_url" = "https://wxdtoss.oss-cn-beijing.aliyuncs.com/upload/202010/17/202010170051567403.png";
+        "parent_id" = 54;
+        scale = 0;
+        title = "\U5176\U4ed6";
+    }
+    );
+    color = "#f27078";
+    id = 54;
+    "img_url" = "https://wxdtoss.oss-cn-beijing.aliyuncs.com/upload/202010/17/202010170043544132.png";
+    "parent_id" = 0;
+    scale = 0;
+    title = "\U6587\U5b66\U673a\U6784";
+},
+{
+    color = "#59bbc6";
+    id = 71;
+    "img_url" = "https://wxdtoss.oss-cn-beijing.aliyuncs.com/upload/202010/17/202010170054307237.png";
+    "parent_id" = 0;
+    scale = 0;
+    title = "\U56fe\U4e66\U9986";
+},
+{
+    color = "#a28fa5";
+    id = 72;
+    "img_url" = "https://wxdt.vqune.com/upload/202009/28/202009281557063206.png";
+    "parent_id" = 0;
+    scale = 0;
+    title = "\U4e66\U5e97";
+},
+{
+    color = "#47a5d9";
+    id = 73;
+    "img_url" = "https://wxdtoss.oss-cn-beijing.aliyuncs.com/upload/202010/17/202010170056203810.png";
+    "parent_id" = 0;
+    scale = 0;
+    title = "\U827a\U6587\U7a7a\U95f4";
+},
+{
+    color = "#a4c069";
+    id = 74;
+    "img_url" = "https://wxdtoss.oss-cn-beijing.aliyuncs.com/upload/202010/17/202010170057530470.png";
+    "parent_id" = 0;
+    scale = 0;
+    title = "\U6587\U521b\U5546\U5e97";
+},
+{
+    color = "#b2b2b2";
+    id = 110;
+    "img_url" = "https://wxdtoss.oss-cn-beijing.aliyuncs.com/upload/202010/12/202010122339120618.png";
+    "parent_id" = 0;
+    scale = 0;
+    title = "\U5168\U90e8";
+}
+)
