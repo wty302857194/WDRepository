@@ -38,8 +38,8 @@
 - (void)tapAvatar {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定要清除缓存？" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
     }];
     UIAlertAction *album = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self cleanCache];
