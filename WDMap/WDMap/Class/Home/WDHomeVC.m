@@ -7,6 +7,7 @@
 
 #import "WDHomeVC.h"
 #import "WDHomeCollectionViewCell.h"
+#import "WDWKWebVC.h"
 
 static  NSString *identifier = @"identifier";
 
@@ -108,12 +109,13 @@ typedef void(^FooterClickBlcok)(void);
         switch (indexPath.row) {
             case 0:
             {
-                [kDelegate rootLoginVC];
+                [kDelegate rootTabBarVC:1];
             }
                 break;
             case 1:
             {
-                
+                [WDGlobal shareInstance].isVoiceBox = YES;
+                [kDelegate rootTabBarVC:0];
             }
                 break;
             case 2:
@@ -128,7 +130,8 @@ typedef void(^FooterClickBlcok)(void);
                 break;
             case 4:
             {
-                
+                WDWKWebVC *vc = [[WDWKWebVC alloc] init];
+                [weakSelf presentViewController:vc animated:YES completion:nil];
             }
                 break;
             case 5:
@@ -136,11 +139,7 @@ typedef void(^FooterClickBlcok)(void);
                 [kDelegate rootTabBarVC:3];
             }
                 break;
-            case 6:
-            {
-                
-            }
-                break;
+
             default:
                 break;
         }
@@ -160,9 +159,9 @@ typedef void(^FooterClickBlcok)(void);
     UICollectionReusableView *view = nil;
     if([kind isEqualToString:UICollectionElementKindSectionFooter]){
         CollectionHeaderView *temp = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
-        
+        kWEAK_SELF;
         temp.footerClickBlcok = ^{
-            
+            [kDelegate rootTabBarVC:0];
         };
         view = temp;
     }

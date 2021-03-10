@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, WDRectCornerType) {
 @interface WDGlobal : NSObject
 
 @property (nonatomic, strong) NSMutableArray * rightBarBtnArr;
-
+@property (nonatomic, assign) BOOL isVoiceBox;
 
 /// 单利类
 +(instancetype)shareInstance;

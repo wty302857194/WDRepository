@@ -29,7 +29,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="history_ arrow" translatesAutoresizingMaskIntoConstraints="NO" id="QWO-sN-QAv">
-                        <rect key="frame" x="57.5" y="131" width="16.5" height="15.5"/>
+                        <rect key="frame" x="60.5" y="136" width="10.5" height="9.5"/>
                     </imageView>
                 </subviews>
             </view>
@@ -38,7 +38,7 @@
                 <constraint firstAttribute="trailing" secondItem="YXF-wW-kGZ" secondAttribute="trailing" constant="10" id="MFS-q5-qzJ"/>
                 <constraint firstItem="YXF-wW-kGZ" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="-5" id="Nxl-7Z-7ih"/>
                 <constraint firstItem="IJc-lx-iUX" firstAttribute="centerY" secondItem="YXF-wW-kGZ" secondAttribute="centerY" id="YET-zx-9Zj"/>
-                <constraint firstItem="QWO-sN-QAv" firstAttribute="top" secondItem="YXF-wW-kGZ" secondAttribute="bottom" id="aXT-ry-qFD"/>
+                <constraint firstItem="QWO-sN-QAv" firstAttribute="top" secondItem="YXF-wW-kGZ" secondAttribute="bottom" constant="5" id="aXT-ry-qFD"/>
                 <constraint firstItem="QWO-sN-QAv" firstAttribute="centerX" secondItem="YXF-wW-kGZ" secondAttribute="centerX" id="nQM-AG-LTV"/>
                 <constraint firstItem="IJc-lx-iUX" firstAttribute="centerX" secondItem="YXF-wW-kGZ" secondAttribute="centerX" id="zQr-jX-iMs"/>
             </constraints>
@@ -52,7 +52,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="history_ arrow" width="16.5" height="15.5"/>
-        <image name="history_select_img" width="99" height="99"/>
+        <image name="history_ arrow" width="10.5" height="9.5"/>
+        <image name="history_select_img" width="62.5" height="62.5"/>
     </resources>
 </document>

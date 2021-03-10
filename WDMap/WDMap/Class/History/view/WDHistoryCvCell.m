@@ -6,15 +6,21 @@
 //
 
 #import "WDHistoryCvCell.h"
+#import "WDDigitModel.h"
 
 @implementation WDHistoryCvCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
 }
-- (void)setIsSelect:(BOOL)isSelect {
-    if (isSelect) {
+- (void)setModel:(WDDigitModel *)model {
+    _model = model;
+    
+    self.titleLab.text = model.title?:@"";
+    
+    if (model.isSelect) {
         self.backImgView.image = [UIImage imageNamed:@"history_select_img"];
         self.arrowImgView.hidden = NO;
 
@@ -23,4 +29,5 @@
         self.arrowImgView.hidden = YES;
     }
 }
+
 @end

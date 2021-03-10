@@ -8,12 +8,13 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class WDDigitModel;
 @interface WDHistoryCvCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *backImgView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UIImageView *arrowImgView;
-@property (nonatomic, assign) BOOL isSelect;
+
+@property (nonatomic, strong) WDDigitModel * model;
 @end
 
 NS_ASSUME_NONNULL_END

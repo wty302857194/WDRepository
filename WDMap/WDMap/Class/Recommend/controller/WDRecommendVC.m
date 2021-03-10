@@ -11,6 +11,7 @@
 #import "WDHomeVC.h"
 
 @interface WDRecommendVC ()<UIScrollViewDelegate>
+@property(nonatomic, strong) UIButton *rightBtn;
 
 @property(nonatomic, strong) UIButton *selectBtn;
 @property(nonatomic, strong) UILabel *lineLab;
@@ -26,6 +27,11 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
     [self initUI];
+    
+    if ([WDGlobal shareInstance].isVoiceBox) {
+        [self dynamicClick:self.rightBtn];
+        [self.scrollView setContentOffset:CGPointMake(kSCREEN_WIDTH, 0)];
+    }
 }
 - (void)initUI {
     [self addBarButtonItem];
@@ -63,6 +69,7 @@
     rightBtn.tag = 11;
     rightBtn.frame = CGRectMake(titleView.width/2.f, 0, titleView.width/2.f, titleView.height);
     [titleView addSubview:rightBtn];
+    self.rightBtn = rightBtn;
     
     UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, titleView.height-1, titleView.width/2.f, 1)];
     lab.backgroundColor = hexColor(ffeb00);
