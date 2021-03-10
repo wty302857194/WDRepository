@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, WDNetWorkStatus) {
+    ReachableViaWWAN,
+    ReachableViaWiFi,
+    ReachableViaNone,
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 #define kNetworkCode [[data objectForKey:@"code"] ? [data objectForKey:@"code"] : @-1 integerValue]
@@ -54,6 +60,9 @@ NS_ASSUME_NONNULL_BEGIN
                downloadSuccess:(void (^)(id responseObject))success
                downloadFailure:(void (^)(NSError *error))failure
                       progress:(void (^)(float progress))progress;
+
+/// 用来判断网络状态
++ (void)monitorNetWorking:(void (^)(WDNetWorkStatus status))statusBlock;
 
 @end
 

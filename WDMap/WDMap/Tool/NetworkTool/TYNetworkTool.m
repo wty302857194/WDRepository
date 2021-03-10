@@ -246,5 +246,36 @@ static AFNetworkClient *_sharedClient;
     
 }
 
-
++ (void)monitorNetWorking:(void (^)(WDNetWorkStatus status))statusBlock {
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+//        switch (status) {
+//            case -1:
+//                NSLog(@"未知网络");
+//                break;
+//            case 0:
+//                NSLog(@"网络不可达");
+//                break;
+//            case 1:
+//                NSLog(@"GPRS网络");
+//                break;
+//            case 2:
+//                NSLog(@"Wi-Fi网络");
+//                break;
+//            default:
+//                break;
+//        }
+        
+        if(status == AFNetworkReachabilityStatusReachableViaWWAN) {
+            NSLog(@"GPRS网络");
+            statusBlock(ReachableViaWWAN);
+        } else if(status == AFNetworkReachabilityStatusReachableViaWiFi) {
+            NSLog(@"Wi-Fi网络");
+            statusBlock(ReachableViaWiFi);
+        } else {
+            NSLog(@"没网");
+            statusBlock(ReachableViaNone);
+        }
+    }];
+}
 @end

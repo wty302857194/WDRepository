@@ -8,6 +8,8 @@
 #import "WDMineSettingVC.h"
 #import "WDMineSettingTVCell.h"
 #import "WDEditProfileVC.h"
+#import "WDWifiVCTvC.h"
+#import "WDWKWebVC.h"
 
 @interface WDMineSettingVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
@@ -53,7 +55,9 @@
             break;
         case 2:
         {
-            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            WDWifiVCTvC *vc = [storyboard instantiateViewControllerWithIdentifier:@"WDWifiVCTvC"];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 3:
@@ -63,7 +67,7 @@
             break;
         case 4:
         {
-            
+            [self GetgywdurlRequestData];
         }
             break;
         case 5:
@@ -74,6 +78,20 @@
         default:
             break;
     }
+}
+/// Getgywdurl
+- (void)GetgywdurlRequestData {
+    NSDictionary *dic = @{
+        
+    };
+    [TYNetworkTool getRequest:WDGetgywdurlAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
+        if ([data[@"status"] integerValue] == 1) {
+        }else {
+            [MBProgressHUD promptMessage:msg inView:self.view];
+        }
+    } failureBlock:^(NSString * _Nonnull description) {
+        [MBProgressHUD promptMessage:description inView:self.view];
+    }];
 }
 #pragma mark - lazy
 - (UITableView *)tableView {

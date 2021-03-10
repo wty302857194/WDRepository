@@ -32,6 +32,8 @@ typedef NS_ENUM(NSInteger, WDRectCornerType) {
 /// 初始化数据
 - (void)initData;
 
+/// 是否使用Wi-Fi
++ (BOOL)isSelectWiFi;
 /// 是否是第一次进来
 + (BOOL)isFirstComed;
 // 用户userID

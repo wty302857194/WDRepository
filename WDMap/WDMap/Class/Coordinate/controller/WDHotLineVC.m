@@ -39,6 +39,21 @@
 
 }
 - (void)leftClick {
+    [TYNetworkTool monitorNetWorking:^(WDNetWorkStatus status) {
+        if (status == ReachableViaWWAN) {
+            if ([WDGlobal isSelectWiFi]) {
+                [MBProgressHUD promptMessage:@"当前不是Wi-Fi环境，若要播放请到设置-通用中设置" inView:kWindow];
+                return;
+            }
+        }else if (status == ReachableViaWiFi) {
+            
+        }else {
+            [MBProgressHUD promptMessage:@"当前网络无效" inView:kWindow];
+            return;
+        }
+    }];
+    
+    
     [self initPlayer];
     
     self.leftStack.hidden = YES;

@@ -23,6 +23,10 @@
 - (void)initData {
     self.rightBarBtnArr = [NSMutableArray arrayWithCapacity:0];
 }
++ (BOOL)isSelectWiFi {
+    BOOL isWiFi = [[WDUtil getInfoForKey:WD_SELECTWIFI] boolValue];
+    return isWiFi;
+}
 /// 是否是第一次进来
 + (BOOL)isFirstComed {
     BOOL role = [[WDUtil getInfoForKey:WD_IDSFIRSTCOMED] boolValue];
@@ -257,6 +261,20 @@
 }
 
 + (void)showMusicPlayView {
+    [TYNetworkTool monitorNetWorking:^(WDNetWorkStatus status) {
+        if (status == ReachableViaWWAN) {
+            if ([WDGlobal isSelectWiFi]) {
+                [MBProgressHUD promptMessage:@"当前不是Wi-Fi环境，若要播放请到设置-通用中设置" inView:kWindow];
+                return;
+            }
+        }else if (status == ReachableViaWiFi) {
+            
+        }else {
+            [MBProgressHUD promptMessage:@"当前网络无效" inView:kWindow];
+            return;
+        }
+    }];
+    
     WDMusicPlayView *playView = [WDMusicPlayView musicPlayView];
 
     if (![kWindow.subviews containsObject:playView]) {

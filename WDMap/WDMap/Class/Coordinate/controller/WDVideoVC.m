@@ -107,6 +107,21 @@
 }
 #pragma mark - 播放器
 - (void)initPlayer {
+    
+    [TYNetworkTool monitorNetWorking:^(WDNetWorkStatus status) {
+        if (status == ReachableViaWWAN) {
+            if ([WDGlobal isSelectWiFi]) {
+                [MBProgressHUD promptMessage:@"当前不是Wi-Fi环境，若要播放请到设置-通用中设置" inView:kWindow];
+                return;
+            }
+        }else if (status == ReachableViaWiFi) {
+            
+        }else {
+            [MBProgressHUD promptMessage:@"当前网络无效" inView:kWindow];
+            return;
+        }
+    }];
+    
     if (self.urlString.length == 0) {
         [MBProgressHUD promptMessage:@"暂无视频资源" inView:self.view];
         return;

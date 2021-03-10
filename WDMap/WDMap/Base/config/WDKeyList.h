@@ -21,7 +21,8 @@ static NSString * const WD_USERNAME  = @"WD_USERNAME";
 /// 用户密码
 static NSString * const WD_PASSWORD  = @"WD_PASSWORD";
 
-
+/// 用户是否使用Wi-Fi
+static NSString * const WD_SELECTWIFI  = @"WD_SELECTWIFI";
 /// MARK: ---------------通知----------------
 
 
