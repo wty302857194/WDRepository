@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIView *userBackView;
 @property (weak, nonatomic) IBOutlet UILabel *detailContentLab;
 @property (weak, nonatomic) IBOutlet UITableViewCell *contentCell;
+@property (weak, nonatomic) IBOutlet UILabel *addressLab;
+@property (weak, nonatomic) IBOutlet UILabel *timeLab;
 
 @property (nonatomic, assign) CGFloat cell_height;
 @end
@@ -111,6 +113,8 @@
     
 }
 - (void)initWithData {
+    self.timeLab.text = self.scenicModel.kaifangshijian?:@"";
+    self.addressLab.text = self.scenicModel.xiangxidizhi?:@"";
     self.detailContentLab.attributedText = [WDGlobal getHtmlStringWithString:self.scenicModel.fields[@"jingdianjieshao"]?:@""];
     [self.detailContentLab sizeToFit];
     

@@ -62,7 +62,8 @@
 - (void)initWithData:(NSDictionary *)dic {
     self.clockNumLab.text = dic[@"shichang"]?:@"0";
     self.locationNumLab.text = dic[@"jindianshu"]?:@"";
-    
+    self.titleLab.text = dic[@"parenttitle"]?:@"";
+    self.contentLab.text = dic[@"title"]?:@"";
     self.dataArr = [WDRoadjingdiandataModel mj_objectArrayWithKeyValuesArray:dic[@"data"]];
     [self.collectionView reloadData];
 }

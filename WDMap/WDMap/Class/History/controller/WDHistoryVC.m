@@ -117,5 +117,7 @@
         make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
     }];
     
+    UIImageView *backImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"history_bgi"]];
+    
 }
 @end
