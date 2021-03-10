@@ -28,6 +28,7 @@ PODS:
   - SDWebImageFLPlugin (0.5.0):
     - FLAnimatedImage (>= 1.0.11)
     - SDWebImage/Core (~> 5.10)
+  - Tencent-MapSDK (4.4.0.1)
   - ZKCycleScrollView (2.0.1)
 
 DEPENDENCIES:
@@ -41,6 +42,7 @@ DEPENDENCIES:
   - SDCycleScrollView
   - SDWebImage
   - SDWebImageFLPlugin
+  - Tencent-MapSDK
   - ZKCycleScrollView
 
 SPEC REPOS:
@@ -55,6 +57,7 @@ SPEC REPOS:
     - SDCycleScrollView
     - SDWebImage
     - SDWebImageFLPlugin
+    - Tencent-MapSDK
     - ZKCycleScrollView
 
 SPEC CHECKSUMS:
@@ -68,8 +71,9 @@ SPEC CHECKSUMS:
   SDCycleScrollView: a0d74c3384caa72bdfc81470bdbc8c14b3e1fbcf
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
   SDWebImageFLPlugin: 245c7ce1e77028b6ef415240847b3f8aa4b106b7
+  Tencent-MapSDK: 5d87a1a84600e941557c8b1ac03a862085e51752
   ZKCycleScrollView: 4b353d17b7f469b245a1c606d5a977e72b940895
 
-PODFILE CHECKSUM: c9e7a729d36c7b424d06a981be5b0479720812cd
+PODFILE CHECKSUM: 695d32c5af0c9cb2f9bff10e8cb9a4ecbf9496c1
 
 COCOAPODS: 1.9.3

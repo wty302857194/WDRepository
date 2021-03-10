@@ -237,6 +237,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+## Tencent-MapSDK
+
+Copyright © 1998-2018 Tencent All Rights Reserved
+
 ## ZKCycleScrollView
 
 MIT License

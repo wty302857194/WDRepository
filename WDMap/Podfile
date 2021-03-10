@@ -12,7 +12,7 @@ target 'WDMap' do
   pod 'SDWebImageFLPlugin'
   pod 'MJExtension'
   pod 'MJRefresh'
-#  pod 'Tencent-MapSDK'
+  pod 'Tencent-MapSDK'
   pod 'ZKCycleScrollView'
   pod 'FLAnimatedImage'
   pod 'SDCycleScrollView'

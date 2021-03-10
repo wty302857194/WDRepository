@@ -112,6 +112,7 @@
 		32B24DF425C44BE4001DE9C5 /* WDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B24DF325C44BE4001DE9C5 /* WDLoginViewController.m */; };
 		32B24DF925C44C49001DE9C5 /* WDRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B24DF825C44C49001DE9C5 /* WDRegisterViewController.m */; };
 		32B24DFE25C4F17D001DE9C5 /* WDGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B24DFD25C4F17D001DE9C5 /* WDGuideView.m */; };
+		32B8A60B25F8DF7B002304FB /* WDDigitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B8A60A25F8DF7B002304FB /* WDDigitModel.m */; };
 		32BDB54E25E1474F004803D4 /* WDVoiceBoxDetailTvCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BDB54C25E1474F004803D4 /* WDVoiceBoxDetailTvCell.m */; };
 		32BDB54F25E1474F004803D4 /* WDVoiceBoxDetailTvCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32BDB54D25E1474F004803D4 /* WDVoiceBoxDetailTvCell.xib */; };
 		32BDB55725E3FF97004803D4 /* WDLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BDB55525E3FF97004803D4 /* WDLaunchViewController.m */; };
@@ -339,6 +340,8 @@
 		32B24DF825C44C49001DE9C5 /* WDRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WDRegisterViewController.m; path = WDMap/Class/Login/WDRegisterViewController.m; sourceTree = SOURCE_ROOT; };
 		32B24DFC25C4F17D001DE9C5 /* WDGuideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDGuideView.h; sourceTree = "<group>"; };
 		32B24DFD25C4F17D001DE9C5 /* WDGuideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDGuideView.m; sourceTree = "<group>"; };
+		32B8A60925F8DF7B002304FB /* WDDigitModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDDigitModel.h; sourceTree = "<group>"; };
+		32B8A60A25F8DF7B002304FB /* WDDigitModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDDigitModel.m; sourceTree = "<group>"; };
 		32BDB54B25E1474F004803D4 /* WDVoiceBoxDetailTvCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDVoiceBoxDetailTvCell.h; sourceTree = "<group>"; };
 		32BDB54C25E1474F004803D4 /* WDVoiceBoxDetailTvCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDVoiceBoxDetailTvCell.m; sourceTree = "<group>"; };
 		32BDB54D25E1474F004803D4 /* WDVoiceBoxDetailTvCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WDVoiceBoxDetailTvCell.xib; sourceTree = "<group>"; };
@@ -914,6 +917,7 @@
 		32B24DA425C42656001DE9C5 /* History */ = {
 			isa = PBXGroup;
 			children = (
+				32B8A5EC25F8DABA002304FB /* model */,
 				3267663A25E63EEB00FF6E60 /* controller */,
 				3267663B25E63EFA00FF6E60 /* view */,
 			);
@@ -977,6 +981,15 @@
 				325FE8F325C69AAA00E247A2 /* WDForgetVC.m */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		32B8A5EC25F8DABA002304FB /* model */ = {
+			isa = PBXGroup;
+			children = (
+				32B8A60925F8DF7B002304FB /* WDDigitModel.h */,
+				32B8A60A25F8DF7B002304FB /* WDDigitModel.m */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		32F1166A25DC19C000B30DAA /* model */ = {
@@ -1079,6 +1092,7 @@
 				32B24CF525C41EEF001DE9C5 /* Frameworks */,
 				32B24CF625C41EEF001DE9C5 /* Resources */,
 				1D961B8EE43B207CF7B53853 /* [CP] Embed Pods Frameworks */,
+				707F311635A5BBC281BF8997 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1189,6 +1203,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WDMap/Pods-WDMap-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		707F311635A5BBC281BF8997 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WDMap/Pods-WDMap-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WDMap/Pods-WDMap-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WDMap/Pods-WDMap-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A8CA2759E0083D1EAB542C72 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1236,6 +1267,7 @@
 				32B24D8725C425DE001DE9C5 /* UIScreen+WDExtension.m in Sources */,
 				3267663625E636B000FF6E60 /* WDMineMedalDetailVC.m in Sources */,
 				3254609825C9A23A00E788DF /* CALayer+Category.m in Sources */,
+				32B8A60B25F8DF7B002304FB /* WDDigitModel.m in Sources */,
 				32B24D8425C425DE001DE9C5 /* NSDictionary+WDSafeObjectForKey.m in Sources */,
 				325FE8F525C69AAA00E247A2 /* WDForgetVC.m in Sources */,
 				3243FA0925DC0063005EECEE /* WDRoadDetailView.m in Sources */,
