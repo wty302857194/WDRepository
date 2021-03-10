@@ -8,6 +8,7 @@
 #import "WDHistoryVC.h"
 #import "WDHistoryCvCell.h"
 #import "WDDigitModel.h"
+#import "WDScenicModel.h"
 
 static const  NSInteger maxWidth = 70;
 
@@ -213,11 +214,12 @@ static const  NSInteger maxWidth = 70;
     [scrollerView setContentSize:CGSizeMake(count * kSCREEN_WIDTH, scrollerView.height)];
     
     for (int i = 0; i<count; i++) {
-        UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(i*kSCREEN_WIDTH, 0, scrollerView.width, scrollerView.height)];
+        UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(i*kSCREEN_WIDTH, 0, kSCREEN_WIDTH, scrollerView.height)];
+        bottomView.clipsToBounds = YES;
         [scrollerView addSubview:bottomView];
         
         UIImageView *backImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"history_bgi"]];
-        backImgView.contentMode = UIViewContentModeScaleAspectFill;
+        backImgView.contentMode = UIViewContentModeScaleAspectFit;
         [bottomView addSubview:backImgView];
         [backImgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.offset(0);
@@ -257,9 +259,11 @@ static const  NSInteger maxWidth = 70;
         float y = 0;
 
         count = arc4random()%10 + maxWidth -10;
+        btn.tag = [model.ID integerValue];
+        btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [btn setTitle:model.xingming?:@"" forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(touchClick:) forControlEvents:UIControlEventTouchUpInside];
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn setTitle:model.title forState:UIControlStateNormal];
         [btn setBackgroundImage:[UIImage imageNamed:@"history_nomal_img"] forState:UIControlStateNormal];
 //        x = arc4random()%(width/2)+(width/4);
 //        y = arc4random()%(height/2)+(width/4);
@@ -279,7 +283,6 @@ static const  NSInteger maxWidth = 70;
     }
 }
 - (void)touchClick:(UIButton *)btn {
-    [self correctAnchorPointForView:btn];
     for (UIView *view in btn.superview.subviews) {
         if ([view isKindOfClass:[UIButton class]]) {
             if (view != btn) {
@@ -289,7 +292,76 @@ static const  NSInteger maxWidth = 70;
     }
     
     [btn setBackgroundImage:[UIImage imageNamed:@"history_ poetry_name"] forState:UIControlStateNormal];
+    
+    [self GetjingdiantouidRequestData:[NSString stringWithFormat:@"%ld", (long)btn.tag] fromView:btn];
 }
+/*
+ action:Getjingdiantouid
+ rwid:人物ID
+ pageSize：每页记录数
+ pageIndex：当前页数
+ */
+- (void)GetjingdiantouidRequestData:(NSString *)rwid fromView:(UIButton *)btn{
+    NSDictionary *dic = @{
+        @"rwid" : rwid,
+        @"pageSize" : @"9999",
+        @"pageIndex" : @"0"
+    };
+    [TYNetworkTool getRequest:WDGetjingdiantouidAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
+        if ([data[@"status"] integerValue] == 1) {
+            NSArray *arr = [WDScenicModel mj_objectArrayWithKeyValuesArray:data[@"data"]];
+            [self initJingdianUI:arr withSupperView:btn];
+        }else {
+            [MBProgressHUD promptMessage:msg inView:self.view];
+        }
+    } failureBlock:^(NSString * _Nonnull description) {
+        [MBProgressHUD promptMessage:description inView:self.view];
+    }];
+}
+- (void)initJingdianUI:(NSArray *)dataArr withSupperView:(UIButton *)button {
+    UIView *view = button.superview;
+    NSInteger width = view.frame.size.width;
+    NSInteger height = view.frame.size.height;
+
+    NSMutableArray *frameArr = [NSMutableArray arrayWithCapacity:0];
+    [frameArr addObject:@(button.frame)];
+    for (int i = 0; i < dataArr.count; i++) {
+        WDScenicModel *model = dataArr[i];
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+
+        // 元素宽高
+        float count = 0;
+        // x坐标
+        float x = 0;
+        // y坐标
+        float y = 0;
+
+        count = arc4random()%10 + maxWidth -10;
+        btn.tag = [model.ID integerValue];
+        btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [btn setTitle:model.title?:@"" forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(touchClick:) forControlEvents:UIControlEventTouchUpInside];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"history_nomal_img"] forState:UIControlStateNormal];
+//        x = arc4random()%(width/2)+(width/4);
+//        y = arc4random()%(height/2)+(width/4);
+        x = arc4random()%(width *2/3)+(width/7);
+        y = arc4random()%(height*2/3)+(height/7);
+
+            while ([self isContain:CGRectMake(x, y, count, count) frameArray:frameArr]) {
+                x = arc4random()%(width *2/3)+(width/7);
+                y = arc4random()%(height*2/3)+(height/7);
+            }
+        
+
+        btn.frame = CGRectMake(x, y, count, count);
+        [view addSubview:btn];
+
+        [frameArr addObject:@(btn.frame)];
+    }
+}
+
+
 - (BOOL)isContain:(CGRect)currentFrame frameArray:(NSArray *)frameArr {
 
     BOOL isContain = NO;
