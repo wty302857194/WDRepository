@@ -35,6 +35,7 @@
 
 /// 是否是通过搜索获取的数据
 @property (nonatomic, assign) BOOL isSearch;
+
 @end
 
 @implementation WDCoordinateVC
@@ -54,6 +55,19 @@
     /// 接口调用
     [self getjingdianfenleiRequestData];
     [self getjingdianRequestData:@"" fenleiid:@"0" pageSize:@"" key:@""];
+    
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if ([WDGlobal shareInstance].scenicModel) {
+        [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake([[WDGlobal shareInstance].scenicModel.jingdu floatValue], [[WDGlobal shareInstance].scenicModel.weidu floatValue]) animated:YES];
+        self.scenicView.hidden = NO;
+        self.scenicView.model = [WDGlobal shareInstance].scenicModel;
+        
+        [WDGlobal shareInstance].scenicModel = nil;
+    }
 }
 - (void)initWithData {
     self.count = 0;

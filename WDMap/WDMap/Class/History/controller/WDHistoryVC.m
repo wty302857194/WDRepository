@@ -22,6 +22,7 @@ static const  NSInteger maxWidth = 70;
 @property (nonatomic, assign) NSInteger selectIndex;
 
 @property (nonatomic, copy) NSArray * poetArr;
+@property (nonatomic, copy) NSArray * scenicArr;
 @end
 
 @implementation WDHistoryVC
@@ -51,7 +52,7 @@ static const  NSInteger maxWidth = 70;
     
     
     
-    [WDGlobal addCorners:self.bottomView];
+    
 }
 #pragma mark - network
 - (void)GetniandaiRequestData {
@@ -214,9 +215,10 @@ static const  NSInteger maxWidth = 70;
     [scrollerView setContentSize:CGSizeMake(count * kSCREEN_WIDTH, scrollerView.height)];
     
     for (int i = 0; i<count; i++) {
-        UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(i*kSCREEN_WIDTH, 0, kSCREEN_WIDTH, scrollerView.height)];
+        WDBaseView *bottomView = [[WDBaseView alloc] initWithFrame:CGRectMake(i*kSCREEN_WIDTH, 0, kSCREEN_WIDTH, scrollerView.height)];
         bottomView.clipsToBounds = YES;
         [scrollerView addSubview:bottomView];
+        [WDGlobal addCorners:bottomView];
         
         UIImageView *backImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"history_bgi"]];
         backImgView.contentMode = UIViewContentModeScaleAspectFit;
@@ -283,6 +285,8 @@ static const  NSInteger maxWidth = 70;
     }
 }
 - (void)touchClick:(UIButton *)btn {
+    if(btn.isSelected) return;
+    
     for (UIView *view in btn.superview.subviews) {
         if ([view isKindOfClass:[UIButton class]]) {
             if (view != btn) {
@@ -294,6 +298,8 @@ static const  NSInteger maxWidth = 70;
     [btn setBackgroundImage:[UIImage imageNamed:@"history_ poetry_name"] forState:UIControlStateNormal];
     
     [self GetjingdiantouidRequestData:[NSString stringWithFormat:@"%ld", (long)btn.tag] fromView:btn];
+    
+    btn.selected = !btn.selected;
 }
 /*
  action:Getjingdiantouid
@@ -309,8 +315,8 @@ static const  NSInteger maxWidth = 70;
     };
     [TYNetworkTool getRequest:WDGetjingdiantouidAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
         if ([data[@"status"] integerValue] == 1) {
-            NSArray *arr = [WDScenicModel mj_objectArrayWithKeyValuesArray:data[@"data"]];
-            [self initJingdianUI:arr withSupperView:btn];
+            self.scenicArr = [WDScenicModel mj_objectArrayWithKeyValuesArray:data[@"data"]];
+            [self initJingdianUI:self.scenicArr withSupperView:btn];
         }else {
             [MBProgressHUD promptMessage:msg inView:self.view];
         }
@@ -319,10 +325,24 @@ static const  NSInteger maxWidth = 70;
     }];
 }
 - (void)initJingdianUI:(NSArray *)dataArr withSupperView:(UIButton *)button {
+    
+    
     UIView *view = button.superview;
     NSInteger width = view.frame.size.width;
     NSInteger height = view.frame.size.height;
 
+    [UIView animateWithDuration:0.2 animations:^{
+        button.width = button.width +10;
+        button.height = button.height +10;
+        
+        for (UIView *imgView in view.subviews) {
+            if ([imgView isKindOfClass:[UIImageView class]]) {
+                imgView.transform = CGAffineTransformMakeScale(0.95, 0.95);
+            }
+        }
+    }];
+    
+    
     NSMutableArray *frameArr = [NSMutableArray arrayWithCapacity:0];
     [frameArr addObject:@(button.frame)];
     for (int i = 0; i < dataArr.count; i++) {
@@ -330,29 +350,23 @@ static const  NSInteger maxWidth = 70;
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
 
         // 元素宽高
-        float count = 0;
+        float count = button.width - 10;
+        
         // x坐标
-        float x = 0;
+        float x = arc4random()%(width/2)+(width/5);
         // y坐标
-        float y = 0;
-
-        count = arc4random()%10 + maxWidth -10;
-        btn.tag = [model.ID integerValue];
+        float y = arc4random()%(height/2)+(height/5);
+        while ([self isContain:CGRectMake(x, y, count, count) frameArray:frameArr]) {
+            x = arc4random()%(width/2)+(width/5);
+            y = arc4random()%(height/2)+(height/5);
+        }
+        
+        btn.tag = i + 9999999;
         btn.titleLabel.font = [UIFont systemFontOfSize:14];
         [btn setTitle:model.title?:@"" forState:UIControlStateNormal];
-        [btn addTarget:self action:@selector(touchClick:) forControlEvents:UIControlEventTouchUpInside];
+        [btn addTarget:self action:@selector(jingdianDetail:) forControlEvents:UIControlEventTouchUpInside];
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn setBackgroundImage:[UIImage imageNamed:@"history_nomal_img"] forState:UIControlStateNormal];
-//        x = arc4random()%(width/2)+(width/4);
-//        y = arc4random()%(height/2)+(width/4);
-        x = arc4random()%(width *2/3)+(width/7);
-        y = arc4random()%(height*2/3)+(height/7);
-
-            while ([self isContain:CGRectMake(x, y, count, count) frameArray:frameArr]) {
-                x = arc4random()%(width *2/3)+(width/7);
-                y = arc4random()%(height*2/3)+(height/7);
-            }
-        
+        [btn setBackgroundImage:[UIImage imageNamed:@"history_item_bgi"] forState:UIControlStateNormal];
 
         btn.frame = CGRectMake(x, y, count, count);
         [view addSubview:btn];
@@ -360,7 +374,12 @@ static const  NSInteger maxWidth = 70;
         [frameArr addObject:@(btn.frame)];
     }
 }
-
+- (void)jingdianDetail:(UIButton *)btn {
+    UITabBarController *tabVC = (UITabBarController *)kWindow.rootViewController;
+    [tabVC setSelectedIndex:2];
+    WDScenicModel *model = self.scenicArr [btn.tag - 9999999];
+    [WDGlobal shareInstance].scenicModel = model;
+}
 
 - (BOOL)isContain:(CGRect)currentFrame frameArray:(NSArray *)frameArr {
 
@@ -374,29 +393,5 @@ static const  NSInteger maxWidth = 70;
     }
     return isContain;
 }
-- (void)setAnchorPoint:(CGPoint)anchorPoint forView:(UIView *)view
-{
-    CGPoint oldOrigin = view.frame.origin;
-    view.layer.anchorPoint = anchorPoint;
-    CGPoint newOrigin = view.frame.origin;
- 
-    CGPoint transition;
-    transition.x = newOrigin.x - oldOrigin.x;
-    transition.y = newOrigin.y - oldOrigin.y;
- 
-    view.center = CGPointMake (view.center.x - transition.x, view.center.y - transition.y);
-}
 
-- (void)correctAnchorPointForView:(UIView *)view
-{
-    CGPoint anchorPoint = CGPointZero;
-    CGPoint superviewCenter = view.superview.center;
-//   superviewCenter是view的superview 的 center 在view.superview.superview中的坐标。
-    CGPoint viewPoint = [view convertPoint:superviewCenter fromView:view.superview.superview];
-//   转换坐标，得到superviewCenter 在 view中的坐标
-    anchorPoint.x = (viewPoint.x) / view.bounds.size.width;
-    anchorPoint.y = (viewPoint.y) / view.bounds.size.height;
- 
-    [self setAnchorPoint:anchorPoint forView:view];
-}
 @end

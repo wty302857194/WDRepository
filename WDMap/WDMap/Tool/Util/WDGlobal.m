@@ -10,6 +10,7 @@
 #import "WDBaseTabBarController.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "WDMusicPlayView.h"
+#import "WDScenicModel.h"
 
 @implementation WDGlobal
 +(instancetype)shareInstance {

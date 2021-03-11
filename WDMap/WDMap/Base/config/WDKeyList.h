@@ -28,6 +28,8 @@ static NSString * const WD_SELECTWIFI  = @"WD_SELECTWIFI";
 
 static NSString * const WD_CHANGEGIFIMAGR = @"WD_CHANGEGIFIMAGR";
 
+/// 数字文都点击风景，相应显示风景详情
+static NSString * const WD_SHOWSCENICVIEW = @"WD_SHOWSCENICVIEW";
 
 
 /// MARK: ---------------地图apiKey----------------

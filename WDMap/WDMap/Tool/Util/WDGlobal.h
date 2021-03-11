@@ -22,10 +22,12 @@ typedef NS_ENUM(NSInteger, WDRectCornerType) {
     WDBottomRightState,
     WDAllState,
 };
+@class WDScenicModel;
 @interface WDGlobal : NSObject
 
 @property (nonatomic, strong) NSMutableArray * rightBarBtnArr;
 @property (nonatomic, assign) BOOL isVoiceBox;
+@property (nonatomic, strong) WDScenicModel * __nullable scenicModel;
 
 /// 单利类
 +(instancetype)shareInstance;
