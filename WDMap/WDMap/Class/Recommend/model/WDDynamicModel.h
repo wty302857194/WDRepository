@@ -18,8 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  其他数据不用理会
  */
 @interface WDDynamicModel : WDBaseModel
-@property (nonatomic, copy) NSString * title;
-@property (nonatomic, copy) NSString * img_url;
+
 @property (nonatomic, copy) NSString * sort_id;
 @property (nonatomic, copy) NSString * content;
 @property (nonatomic, copy) NSString * sub_title;

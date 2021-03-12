@@ -21,7 +21,7 @@
 }
 
 - (void)setModel:(WDMineXunzhangModel *)model {
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:model.xunzhang?:@""] placeholderImage:PLACE_HOLDER_IMAGE];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:model.appxunzhang?:@""] placeholderImage:PLACE_HOLDER_IMAGE];
     self.titleLab.text = model.title;
 }
 

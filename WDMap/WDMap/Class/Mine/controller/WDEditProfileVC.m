@@ -189,6 +189,21 @@
     [self expansion];
 
 }
+
+- (void)UpLoadFileRequestData {
+    NSDictionary *dic = @{
+        @"name" : @"",
+        @"fileValue" : @""
+    };
+    [TYNetworkTool postRequest:WDGetjingdianAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
+        if ([data[@"status"] integerValue] == 1) {
+        }else {
+            [MBProgressHUD promptMessage:msg inView:self.view];
+        }
+    } failureBlock:^(NSString * _Nonnull description) {
+        [MBProgressHUD promptMessage:description inView:self.view];
+    }];
+}
 - (IBAction)save:(id)sender {
     if (self.nichengStr.length == 0) {
         [MBProgressHUD promptMessage:@"请输入您的昵称" inView:self.view];

@@ -28,6 +28,7 @@
 }
 - (void)cellForDataSource:(NSDictionary *)dic indexPath:(NSInteger)index {
     if (index == 0) {
+        self.titlelab.text = @"我的景点";
         NSString *str = [NSString stringWithFormat:@"%@", dic[@"totalcount"]?:@"0"];
         self.numLab.text = [NSString stringWithFormat:@"共计%@个", str];
         NSArray *scenicArr = [WDScenicModel mj_objectArrayWithKeyValuesArray:dic[@"data"]];
@@ -46,6 +47,7 @@
             }
         }
     }else {
+        self.titlelab.text = @"我的勋章";
         NSString *str = [NSString stringWithFormat:@"%@", dic[@"xunzhangshu"]?:@"0"];
         self.numLab.text = [NSString stringWithFormat:@"共计%@个",str];
 
@@ -54,15 +56,17 @@
         
         for (int i = 0; i < xunzhangArr.count; i++) {
             WDMineXunzhangModel * model = xunzhangArr[i];
+            UIImageView *imgView = nil;
             if (i == 0) {
-                [self.imageView1 sd_setImageWithURL:[NSURL URLWithString:model.xunzhang] placeholderImage:PLACE_HOLDER_IMAGE];
+                imgView = self.imageView1;
             }else if(i == 1) {
-                [self.imageView2 sd_setImageWithURL:[NSURL URLWithString:model.xunzhang] placeholderImage:PLACE_HOLDER_IMAGE];
+                imgView = self.imageView2;
             }else if(i == 2) {
-                [self.imageView3 sd_setImageWithURL:[NSURL URLWithString:model.xunzhang] placeholderImage:PLACE_HOLDER_IMAGE];
-            }else if(i == 3) {
-                [self.imageView4 sd_setImageWithURL:[NSURL URLWithString:model.xunzhang] placeholderImage:PLACE_HOLDER_IMAGE];
+                imgView = self.imageView3;
+            }else {
+                imgView = self.imageView4;
             }
+            [imgView sd_setImageWithURL:[NSURL URLWithString:model.appxunzhang] placeholderImage:PLACE_HOLDER_IMAGE];
         }
     }
 }

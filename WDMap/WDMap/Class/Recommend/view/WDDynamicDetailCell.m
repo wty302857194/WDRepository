@@ -21,10 +21,6 @@
     if(model.type == DynamicTypeWenxue) {
         self.yaoshiImgView.hidden = YES;
         self.widthLayout.constant = 0;
-        self.contentLab.textColor = hexColor(3d6ef0);
-
-    }else {
-        self.contentLab.textColor = hexColor(e64870);
     }
     
     self.titleLab.text = model.sub_title?:@"";

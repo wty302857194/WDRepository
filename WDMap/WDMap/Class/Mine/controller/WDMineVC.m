@@ -16,6 +16,7 @@
 static  NSString * const MineCellId = @"WDMineTableViewCell";
 @interface WDMineVC ()<UITableViewDelegate,UITableViewDataSource>
 
+@property (nonatomic, strong) WDMineHeaderView *headerView;
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, copy) NSDictionary * xunzhangDic;
 @property (nonatomic, copy) NSDictionary * scenicDic;
@@ -69,7 +70,7 @@ static  NSString * const MineCellId = @"WDMineTableViewCell";
         [self.tableView.mj_header endRefreshing];
 
         if ([data[@"status"] integerValue] == 1) {
-
+            self.headerView.dataDic = [NSDictionary dictionaryWithDictionary:data[@"data"]];
         }else {
             [MBProgressHUD promptMessage:msg inView:self.view];
         }
@@ -167,6 +168,7 @@ static  NSString * const MineCellId = @"WDMineTableViewCell";
 - (void)addTableViewHeaderView {
     WDMineHeaderView *headerView = [[NSBundle mainBundle] loadNibNamed:@"WDMineHeaderView" owner:nil options:nil].lastObject;
     headerView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_WIDTH*480/750.f);
+    self.headerView = headerView;
     self.tableView.tableHeaderView = headerView;
 }
 - (UITableView *)tableView {

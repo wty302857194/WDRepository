@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WDMineXunzhangModel : WDBaseModel
 
 @property (nonatomic, copy) NSString * xunzhang;
-
+@property (nonatomic, copy) NSString * appxunzhang;
 @end
 
 NS_ASSUME_NONNULL_END

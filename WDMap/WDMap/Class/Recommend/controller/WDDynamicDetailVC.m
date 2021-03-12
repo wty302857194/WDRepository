@@ -328,6 +328,48 @@
         [MBProgressHUD promptMessage:description inView:self.view];
     }];
 }
+/*
+ channel_id （近期活动channel_id=15 书籍推荐channel_id=16 文学动态channel_id=20）
+ */
+- (void)getxiangxiRequestData:(WDDynamicModel *)model {
+    NSString *channel_id = @"";
+    
+    switch (self.dynamicType) {
+        case DynamicTypeWenxue:
+        {
+            channel_id = @"20";
+        }
+            break;
+        case DynamicTypeJinqi:
+        {
+            channel_id = @"15";
+        }
+            break;
+        case DynamicTypeBook:
+        {
+            channel_id = @"16";
+        }
+            break;
+        default:
+            break;
+    }
+    NSDictionary *dic = @{
+        @"channel_id" : channel_id,
+        @"id" : model.ID
+    };
+    [TYNetworkTool getRequest:WDgetxiangxiAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
+        if ([data[@"status"] integerValue] == 1) {
+            WDWebViewController *vc = [[WDWebViewController alloc] init];
+            vc.htmlString = model.content?:@"";
+            vc.navigationItem.title = model.sub_title?:@"";
+            [[WDGlobal getCurrentViewController].navigationController pushViewController:vc animated:YES];
+        }else {
+            [MBProgressHUD promptMessage:msg inView:self.view];
+        }
+    } failureBlock:^(NSString * _Nonnull description) {
+        [MBProgressHUD promptMessage:description inView:self.view];
+    }];
+}
 #pragma mark - delegate
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     if (self.dynamicType == DynamicTypeBook) {
@@ -364,11 +406,8 @@
     return self.dynamicType == DynamicTypeBook ? 180 : 100;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    WDWebViewController *vc = [[WDWebViewController alloc] init];
     WDDynamicModel *model = self.dataArr[indexPath.row];
-    vc.htmlString = model.content?:@"";
-    vc.navigationItem.title = model.sub_title?:@"";
-    [[WDGlobal getCurrentViewController].navigationController pushViewController:vc animated:YES];
+    [self getxiangxiRequestData:model];
 }
 #pragma mark - searchView
 - (WDSearchHistoryView *)searchView {

@@ -22,7 +22,13 @@
 }
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
+    self.addressLab.text = @"";
+    self.nameLab.text = @"";
+}
+- (void)setDataDic:(NSDictionary *)dataDic {
+    _dataDic = dataDic;
+    self.addressLab.text = dataDic[@"user_name"]?:@"";
+    self.nameLab.text = dataDic[@"nick_name"]?:@"";
 }
 - (void)drawRect:(CGRect)rect {
     self.cornerView.layer.cornerRadius = self.cornerView.height/2.f;
