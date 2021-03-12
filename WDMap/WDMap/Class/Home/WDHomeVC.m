@@ -131,6 +131,8 @@ typedef void(^FooterClickBlcok)(void);
             case 4:
             {
                 WDWKWebVC *vc = [[WDWKWebVC alloc] init];
+                vc.navigationItem.title = @"关于文都";
+                vc.htmlString = @"https://wxdt.vqune.com/mobile/guanyuwendu/show-1.html";
                 [weakSelf presentViewController:vc animated:YES completion:nil];
             }
                 break;
