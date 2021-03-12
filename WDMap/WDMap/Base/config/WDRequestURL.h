@@ -58,6 +58,10 @@ static NSString * const WDUserRegisterAPI  = @"?action=user_register";
 static NSString * const WDgetuserAPI  = @"?action=getuser";
 /// 注册协议 Getzcxyurl
 static NSString * const WDGetzcxyurlAPI  = @"?action=Getzcxyurl";
+/// 文件上传
+static NSString * const WDUpLoadFileAPI  = @"?action=UpLoadFile";
+/// 修改用户资料
+static NSString * const WDupdateuserAPI  = @"?action=updateuser";
 
 //MARK: ------------------------------ 关于文都 ------------------------------
 /// Getgywdurl

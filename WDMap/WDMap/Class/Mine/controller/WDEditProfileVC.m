@@ -37,6 +37,7 @@
 @property (nonatomic, copy) NSString * qianmingStr;
 @property (nonatomic, copy) NSString * genderStr;
 
+@property (nonatomic, copy) NSString * headerImageUrl;
 @property (nonatomic, strong) UIImagePickerController * imagePickerController;
 @end
 
@@ -148,7 +149,22 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
     UIImage *image = [info valueForKey:UIImagePickerControllerEditedImage];
+    double size = image.size.height*image.size.width;
+    UIImage *newImage;
+    if ( size > 120 * 120)
+    {
+        CGRect thumbnailRect = CGRectZero;
+        thumbnailRect.origin = CGPointMake(0, 0);
+        thumbnailRect.size.width  = 120;
+        thumbnailRect.size.height = 120;
+        UIGraphicsBeginImageContext(thumbnailRect.size); // this will crop
+        [image drawInRect:thumbnailRect];
+        newImage = UIGraphicsGetImageFromCurrentImageContext();
+        if(newImage == nil)
+            UIGraphicsEndImageContext();
+    }
     self.userImageView.image = image;
+    [self UpLoadFileRequestData];
 }
 
 
@@ -189,14 +205,46 @@
     [self expansion];
 
 }
-
+#pragma mark - 上传文件
+/// 上传文件
 - (void)UpLoadFileRequestData {
+    NSData *data=  UIImagePNGRepresentation(self.userImageView.image);
+    NSString *headStr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
     NSDictionary *dic = @{
         @"name" : @"",
-        @"fileValue" : @""
+        @"fileValue" : headStr
     };
-    [TYNetworkTool postRequest:WDGetjingdianAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
+    [TYNetworkTool getRequest:WDUpLoadFileAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
         if ([data[@"status"] integerValue] == 1) {
+            
+        }else {
+            [MBProgressHUD promptMessage:msg inView:self.view];
+        }
+    } failureBlock:^(NSString * _Nonnull description) {
+        [MBProgressHUD promptMessage:description inView:self.view];
+    }];
+}
+/* 修改用户资料
+ action:updateuser
+ uid：用户ID
+ avatar：头像
+ nick_name：昵称
+ qm：签名
+ sex：男/女
+*/
+- (void)updateuserRequestData {
+    
+    NSDictionary *dic = @{
+        @"uid" : [WDGlobal userID],
+        @"avatar" : self.headerImageUrl?:@"",
+        @"nick_name" : self.nichengStr,
+        @"qm" : self.qianmingStr,
+        @"sex" : self.genderStr,
+    };
+    [TYNetworkTool getRequest:WDupdateuserAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
+        if ([data[@"status"] integerValue] == 1) {
+            
         }else {
             [MBProgressHUD promptMessage:msg inView:self.view];
         }

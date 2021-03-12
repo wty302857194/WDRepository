@@ -9,6 +9,7 @@
 #import "WDRegisterViewController.h"
 #import "WDForgetVC.h"
 #import "WDWebViewController.h"
+#import "WDWKWebVC.h"
 
 static NSInteger const edge = 20;
 static NSInteger const edge1 = 20;
@@ -206,7 +207,7 @@ static NSInteger const edge1 = 20;
     privacyBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     [privacyBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [privacyBtn setTitle:@"<隐私政策>" forState:UIControlStateNormal];
-    [privacyBtn addTarget:self action:@selector(privacyBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [privacyBtn addTarget:self action:@selector(pushWebVC) forControlEvents:UIControlEventTouchUpInside];
 
     
     UIStackView *stackView = [[UIStackView alloc] initWithArrangedSubviews:@[agreeBtn,privacyBtn]];
@@ -368,15 +369,11 @@ static NSInteger const edge1 = 20;
 /// 隐私政策
 - (void)privacyBtnClick {
     
-    if (self.urlString.length > 0) {
-        [self pushWebVC];
-        return;
-    }
-    [self GetxieyiRequestData];
 }
 - (void)pushWebVC {
-    WDWebViewController *vc = [[WDWebViewController alloc] init];
-    vc.htmlString = self.urlString;
+    WDWKWebVC *vc = [[WDWKWebVC alloc] init];
+    vc.navigationItem.title = @"隐私政策";
+    vc.htmlString = @"https://wxdt.vqune.com/mobile/zcxy.html";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -402,22 +399,6 @@ static NSInteger const edge1 = 20;
         if ([data[@"status"] integerValue] == 1) {
             [self saveUserInfo:data[@"data"]];
             [kDelegate setRootVC];
-        }else {
-            [MBProgressHUD promptMessage:msg inView:self.view];
-        }
-    } failureBlock:^(NSString * _Nonnull description) {
-        [MBProgressHUD promptMessage:description inView:self.view];
-    }];
-}
-#pragma mark - Getxieyi
-- (void)GetxieyiRequestData {
-    NSDictionary *dic = @{
-        
-    };
-    [TYNetworkTool getRequest:WDGetxieyiAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
-        if ([data[@"status"] integerValue] == 1) {
-            self.urlString = data[@"content"]?:@"";
-            [self pushWebVC];
         }else {
             [MBProgressHUD promptMessage:msg inView:self.view];
         }

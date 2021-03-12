@@ -6,8 +6,8 @@
 //
 
 #import "WDWKWebVC.h"
-
-@interface WDWKWebVC ()
+#import <WebKit/WebKit.h>
+@interface WDWKWebVC ()<WKNavigationDelegate>
 
 @end
 
@@ -16,16 +16,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setWKWeb];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)setWKWeb {
+    //js脚本 （脚本注入设置网页样式）
+    NSString *jScript = self.htmlString;
+    //配置对象
+    WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
+    //改变初始化方法 （这里一定要给个初始宽度，要不算的高度不对）
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:wkWebConfig];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:jScript]];
+    [webView loadRequest:request];
+    webView.scrollView.bounces = NO;
+    webView.navigationDelegate = self;
+    [self.view addSubview:webView];
+    
 }
-*/
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+
+}
 
 @end

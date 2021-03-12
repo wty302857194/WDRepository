@@ -67,7 +67,10 @@
             break;
         case 4:
         {
-            [self GetgywdurlRequestData];
+            WDWKWebVC *vc = [[WDWKWebVC alloc] init];
+            vc.navigationItem.title = @"关于文都";
+            vc.htmlString = @"https://wxdt.vqune.com/mobile/guanyuwendu/show-1.html";
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 5:
@@ -79,20 +82,7 @@
             break;
     }
 }
-/// Getgywdurl
-- (void)GetgywdurlRequestData {
-    NSDictionary *dic = @{
-        
-    };
-    [TYNetworkTool getRequest:WDGetgywdurlAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
-        if ([data[@"status"] integerValue] == 1) {
-        }else {
-            [MBProgressHUD promptMessage:msg inView:self.view];
-        }
-    } failureBlock:^(NSString * _Nonnull description) {
-        [MBProgressHUD promptMessage:description inView:self.view];
-    }];
-}
+
 #pragma mark - lazy
 - (UITableView *)tableView {
     if (!_tableView) {

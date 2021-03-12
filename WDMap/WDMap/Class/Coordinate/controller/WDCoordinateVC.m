@@ -127,7 +127,7 @@
 /// MARK: 左边按钮
 - (void)addLefMenuBtn {
     UIButton *lefMenuBtn = [UIButton buttonWithBackgroundImage:@"Coordinate_left_aleart" target:self action:@selector(menuCkick)];
-    lefMenuBtn.frame = CGRectMake(0, 0, 30, 30*176/50.f);
+    lefMenuBtn.frame = CGRectMake(0, 0, 22, 22*88/22.f);
     lefMenuBtn.center = CGPointMake(15, self.view.centerY-100);
     [self.view addSubview:lefMenuBtn];
     self.lefMenutBtn = lefMenuBtn;
@@ -254,7 +254,7 @@
     [TYNetworkTool getRequest:WDGetjingdianfenleiAPI parameters:@{} successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
         if ([data[@"status"] integerValue] == 1) {
             self.menuArr = [WDScenicClassifyModel mj_objectArrayWithKeyValuesArray:data[@"data"]];
-            
+            [self menuCkick];
         }else {
             [MBProgressHUD promptMessage:msg inView:self.view];
         }

@@ -216,5 +216,24 @@ static NSInteger const edge = 20;
     self.eyeTF.secureTextEntry = btn.selected;
     btn.selected = !btn.selected;
 }
+/*
+ action:czmima
+ mobile：手机号码   （手机号码和用户ID必须传递其中一个）
+ uid：用户ID   （手机号码和用户ID必须传递其中一个）
 
+ */
+- (void)czmimaRequestData {
+    NSDictionary *dic = @{
+        @"mobile" : self.phoneStr,
+        @"uid" : [WDGlobal userID]
+    };
+    [TYNetworkTool getRequest:WDGetjingdianAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
+        if ([data[@"status"] integerValue] == 1) {
+        }else {
+            [MBProgressHUD promptMessage:msg inView:self.view];
+        }
+    } failureBlock:^(NSString * _Nonnull description) {
+        [MBProgressHUD promptMessage:description inView:self.view];
+    }];
+}
 @end

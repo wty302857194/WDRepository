@@ -55,7 +55,7 @@
     WDBaseView *menuView = [[WDBaseView alloc] initWithFrame:CGRectMake(leftEdge, 80 + (width + edge) * self.index, width + edge * 2, list.count * (width + edge) + edge)];
     menuView.tag = 10+self.index;
     [self addSubview:menuView];
-    [menuView setCornerRadius:10];
+    [WDGlobal addCorners:menuView emunType:WDRightState cornerNum:10];
     menuView.layer.shadowColor = [UIColor grayColor].CGColor;
     menuView.layer.shadowOffset = CGSizeMake(5, 5);
     
@@ -99,9 +99,12 @@
     if (btn.isChild) {
         WDScenicClassifyModel *model = self.menuList[self.index];
         WDScenicClassifyModel *item_model = model.childrendata[tagIndex];
+        
         if (self.menuTouchBlock) {
             self.menuTouchBlock(item_model);
         }
+        
+        [self removeSecondMenu];
     }else {
         WDScenicClassifyModel *model = self.menuList[tagIndex];
         if (model.childrendata && model.childrendata.count > 0) {
@@ -137,9 +140,11 @@
     UIView *view = [self viewWithTag:10];
     [UIView animateWithDuration:0.2 animations:^{
         view.x = -view.width;
+    } completion:^(BOOL finished) {
+        self.hidden = YES;
     }];
     
-    self.hidden = YES;
+    
 
 }
 

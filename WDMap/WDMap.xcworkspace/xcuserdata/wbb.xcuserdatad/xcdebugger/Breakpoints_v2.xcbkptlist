@@ -20,5 +20,133 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2375FC40-D604-4D77-BD50-61E04B9F92F6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WDMap/Class/Mine/controller/WDEditProfileVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
+            landmarkName = "-UpLoadFileRequestData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A037A677-41EE-469A-8A29-E90D636CD7AE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WDMap/Class/Mine/controller/WDEditProfileVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
+            landmarkName = "-UpLoadFileRequestData"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A037A677-41EE-469A-8A29-E90D636CD7AE - bce32c0135be49be"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[WDEditProfileVC UpLoadFileRequestData]"
+                  moduleName = "WDMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wbb/Desktop/%E6%96%87%E9%83%BD%E5%9D%90%E6%A0%87APP%E8%B5%84%E6%96%99/WDRepository/WDMap/WDMap/Class/Mine/controller/WDEditProfileVC.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "218"
+                  endingLineNumber = "218"
+                  offsetFromSymbolStart = "319">
+               </Location>
+               <Location
+                  uuid = "A037A677-41EE-469A-8A29-E90D636CD7AE - 84a4309a7fecc857"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__40-[WDEditProfileVC UpLoadFileRequestData]_block_invoke"
+                  moduleName = "WDMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wbb/Desktop/%E6%96%87%E9%83%BD%E5%9D%90%E6%A0%87APP%E8%B5%84%E6%96%99/WDRepository/WDMap/WDMap/Class/Mine/controller/WDEditProfileVC.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "219"
+                  endingLineNumber = "219"
+                  offsetFromSymbolStart = "82">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "334B1EBE-EBCF-4B6B-8C9A-2E713D59CA04"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WDMap/Tool/NetworkTool/TYNetworkTool.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "+postRequest:parameters:successBlock:failureBlock:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "334B1EBE-EBCF-4B6B-8C9A-2E713D59CA04 - 511f977e6f8ad561"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[TYNetworkTool postRequest:parameters:successBlock:failureBlock:]"
+                  moduleName = "WDMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wbb/Desktop/%E6%96%87%E9%83%BD%E5%9D%90%E6%A0%87APP%E8%B5%84%E6%96%99/WDRepository/WDMap/WDMap/Tool/NetworkTool/TYNetworkTool.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "802">
+               </Location>
+               <Location
+                  uuid = "334B1EBE-EBCF-4B6B-8C9A-2E713D59CA04 - 4a157cc742f705c7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__66+[TYNetworkTool postRequest:parameters:successBlock:failureBlock:]_block_invoke"
+                  moduleName = "WDMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wbb/Desktop/%E6%96%87%E9%83%BD%E5%9D%90%E6%A0%87APP%E8%B5%84%E6%96%99/WDRepository/WDMap/WDMap/Tool/NetworkTool/TYNetworkTool.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "66861023-DA8D-45FA-8F07-C35CEFF225B4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WDMap/Class/Coordinate/controller/WDCoordinateVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
+            landmarkName = "-getjingdianfenleiRequestData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

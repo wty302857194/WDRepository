@@ -53,11 +53,11 @@
 }
 /// MARK : BarButtonItem
 - (void)addBarButtonItem {
-    UIButton *left_home = [UIButton buttonWithType:UIButtonTypeCustom];
-    [left_home setBackgroundImage:[UIImage imageNamed:@"dynamic_search"] forState:UIControlStateNormal];
-    left_home.frame = CGRectMake(0, 0, 25, 25);
-    [left_home addTarget:self action:@selector(leftHomeClick) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:left_home];
+//    UIButton *left_home = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [left_home setBackgroundImage:[UIImage imageNamed:@"dynamic_search"] forState:UIControlStateNormal];
+//    left_home.frame = CGRectMake(0, 0, 25, 25);
+//    [left_home addTarget:self action:@selector(leftHomeClick) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:left_home];
     
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 160, 30)];
     UIButton *leftBtn = [UIButton buttonWithTitle:@"文都动态" titleColor:[UIColor blackColor] font:[UIFont systemFontOfSize:18] target:self action:@selector(dynamicClick:)];
@@ -79,10 +79,6 @@
     
     self.selectBtn = leftBtn;
     
-
-}
-- (void)leftHomeClick {
-//    [kDelegate rootHomeVC];
 }
 
 - (void)dynamicClick:(UIButton *)btn {

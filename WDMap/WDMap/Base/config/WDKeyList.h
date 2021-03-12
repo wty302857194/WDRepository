@@ -20,13 +20,13 @@ static NSString * const WD_MOBILE  = @"WD_MOBILE";
 static NSString * const WD_USERNAME  = @"WD_USERNAME";
 /// 用户密码
 static NSString * const WD_PASSWORD  = @"WD_PASSWORD";
-
 /// 用户是否使用Wi-Fi
 static NSString * const WD_SELECTWIFI  = @"WD_SELECTWIFI";
+
 /// MARK: ---------------通知----------------
 
-
 static NSString * const WD_CHANGEGIFIMAGR = @"WD_CHANGEGIFIMAGR";
+
 
 /// 数字文都点击风景，相应显示风景详情
 static NSString * const WD_SHOWSCENICVIEW = @"WD_SHOWSCENICVIEW";
