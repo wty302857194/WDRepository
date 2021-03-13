@@ -163,8 +163,11 @@
     [view setSelected:NO];
     self.scenicView.hidden = NO;
     NSInteger index = [mapView.annotations indexOfObject:view.annotation];
-    WDScenicModel *model = self.scenicArr[index];
-    self.scenicView.model = model;
+    if (index< self.scenicArr.count) {
+        WDScenicModel *model = self.scenicArr[index];
+        self.scenicView.model = model;
+    }
+    
 }
 #pragma mark - 定位
 - (void)configLocationManager
@@ -276,7 +279,7 @@
         if ([data[@"status"] integerValue] == 1) {
             self.scenicArr = [WDScenicModel mj_objectArrayWithKeyValuesArray:data[@"data"]];
             if (self.isSearch) {
-                CGFloat height = 40*self.scenicArr.count;
+                CGFloat height = self.scenicArr.count == 0 ? 40 : 40*self.scenicArr.count;
                 if (height > 300) {
                     height = 300;
                 }
@@ -346,7 +349,7 @@
 }
 - (WDScenicMenuView *)menuView {
     if (!_menuView) {
-        _menuView = [[WDScenicMenuView alloc] initWithFrame:self.view.bounds withMenuList:self.menuArr?:@[]];
+        _menuView = [[WDScenicMenuView alloc] initWithFrame:CGRectMake(0, 0, 70+28, self.view.height) withMenuList:self.menuArr?:@[]];
         [self.view addSubview:_menuView];
         kWEAK_SELF;
         _menuView.menuTouchBlock = ^(WDScenicClassifyModel * _Nonnull model) {

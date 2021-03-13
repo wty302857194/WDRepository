@@ -68,11 +68,11 @@ static NSInteger const edge1 = 20;
     [self.view addSubview:backView];
     self.backView = backView;
     
-    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [cancelBtn setImage:[UIImage imageNamed:@"login_cancel"] forState:UIControlStateNormal];
-    cancelBtn.frame = CGRectMake(CGRectGetWidth(backView.frame) - 40, 20, 20, 20);
-    [cancelBtn addTarget:self action:@selector(cancelClick) forControlEvents:UIControlEventTouchUpInside];
-    [backView addSubview:cancelBtn];
+//    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [cancelBtn setImage:[UIImage imageNamed:@"login_cancel"] forState:UIControlStateNormal];
+//    cancelBtn.frame = CGRectMake(CGRectGetWidth(backView.frame) - 40, 20, 20, 20);
+//    [cancelBtn addTarget:self action:@selector(cancelClick) forControlEvents:UIControlEventTouchUpInside];
+//    [backView addSubview:cancelBtn];
     
     
     UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(edge1, 50, CGRectGetWidth(backView.frame), 30)];
@@ -304,9 +304,9 @@ static NSInteger const edge1 = 20;
 }
 
 
-- (void)cancelClick {
-    
-}
+//- (void)cancelClick {
+//
+//}
 - (void)eyeClick:(UIButton *)btn {
     self.eyeTF.secureTextEntry = btn.selected;
     btn.selected = !btn.selected;

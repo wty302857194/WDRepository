@@ -8,9 +8,12 @@
 #import "WDScenicMenuView.h"
 #import "WDScenicClassifyModel.h"
 
+static NSInteger const close_width = 28;
 @interface WDScenicMenuView()
 @property (nonatomic, copy) NSArray *menuList;
 @property (nonatomic, strong) UIButton * selectBtn;
+@property (nonatomic, strong) UIButton * rightMenuBtn;
+
 @property (nonatomic, assign) NSInteger index;/// item索引
 /// 二级菜单点击
 @property (nonatomic, assign) BOOL isChild;
@@ -21,27 +24,16 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor clearColor];
         self.menuList = menuList;
         self.index = 0;
         
-        [self initUI];
+        [self initItemList:self.menuList];
         
+        [self addRightMenuBtn];
+
     }
     return self;
-}
-
-- (void)initUI {
-    self.backgroundColor = [UIColor clearColor];
-    UIView *backView = [[UIView alloc] init];
-    [backView addTarget:self action:@selector(viewTouch)];
-    [self addSubview:backView];
-    [backView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.offset(0);
-    }];
-    
-    
-    [self initItemList:self.menuList];
-    
 }
 
 /// 添加item
@@ -59,6 +51,8 @@
     menuView.layer.shadowColor = [UIColor grayColor].CGColor;
     menuView.layer.shadowOffset = CGSizeMake(5, 5);
     
+
+    
     for (int i=0; i<list.count; i++) {
         WDScenicClassifyModel *model = list[i];
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -71,13 +65,27 @@
         [menuView addSubview:btn];
     }
 }
-- (void)viewTouch {
+/// MARK: 左边按钮
+- (void)addRightMenuBtn {
+    
+    CGFloat width = close_width;
+    
+    CGFloat center_y = 80+(self.menuList.count * (50+10) +10)/2.f - width*94/28.f/2;
+
+    UIButton *rightMenuBtn = [UIButton buttonWithBackgroundImage:@"Coordinate_left_close" target:self action:@selector(menuCkick)];
+    rightMenuBtn.frame = CGRectMake(0, 0, width, width*94/28.f);
+    rightMenuBtn.center = CGPointMake(0, center_y);
+    [self addSubview:rightMenuBtn];
+    self.rightMenuBtn = rightMenuBtn;
+}
+- (void)menuCkick {
     [self disappear];
     [self removeSecondMenu];
     
     self.selectBtn.selected = NO;
     self.selectBtn = nil;
 }
+
 /// 移除二级菜单
 - (void)removeSecondMenu {
     if (self.isChild) {
@@ -96,6 +104,9 @@
     self.selectBtn.selected = NO;
     btn.selected = !btn.selected;
     NSInteger tagIndex = btn.tag - 1000;
+    self.rightMenuBtn.hidden = NO;
+    self.width = btn.superview.width + close_width;
+    
     if (btn.isChild) {
         WDScenicClassifyModel *model = self.menuList[self.index];
         WDScenicClassifyModel *item_model = model.childrendata[tagIndex];
@@ -108,6 +119,8 @@
     }else {
         WDScenicClassifyModel *model = self.menuList[tagIndex];
         if (model.childrendata && model.childrendata.count > 0) {
+            self.rightMenuBtn.hidden = YES;
+            self.width = 2 * btn.superview.width;
             self.index = tagIndex;
             self.isChild = YES;
             [self initItemList:model.childrendata];
@@ -132,6 +145,7 @@
             view.x = view.width;
         }else {
             view.x = 0;
+            self.rightMenuBtn.x = view.width;
         }
     }];
     
@@ -140,12 +154,10 @@
     UIView *view = [self viewWithTag:10];
     [UIView animateWithDuration:0.2 animations:^{
         view.x = -view.width;
+        self.rightMenuBtn.x = - self.rightMenuBtn.right;
     } completion:^(BOOL finished) {
         self.hidden = YES;
     }];
-    
-    
-
 }
 
 @end

@@ -75,6 +75,7 @@ typedef void(^FooterClickBlcok)(void);
     [super viewDidLoad];
 
     [self.view addSubview:self.collectionView];
+
     [self addGIFImageView];
 }
 - (void)addGIFImageView {
