@@ -79,6 +79,7 @@
     [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(32.083581, 118.792624) animated:YES];
     //接受地图的delegate回调
     self.mapView.delegate = self;
+    [self.mapView setShowsUserLocation:YES];
     // case3: 设置为3（在配置列表中，第3个是白浅）
     [self.mapView setMapStyle:3];
     //把mapView添加到view中进行显示
