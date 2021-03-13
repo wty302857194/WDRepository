@@ -73,7 +73,8 @@
 
 - (void)rootHomeVC {
     [WDGlobal removeMusicPlayView];
-    self.window.rootViewController = [[WDHomeVC alloc] init];
+    WDBaseNavigationController *nav = [[WDBaseNavigationController alloc] initWithRootViewController:[[WDHomeVC alloc] init]];
+    self.window.rootViewController = nav;
 }
 - (void)rootLunchVC {
     self.window.rootViewController = [[WDLaunchViewController alloc] init];

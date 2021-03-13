@@ -52,13 +52,28 @@ typedef void(^FooterClickBlcok)(void);
 @end
 
 @implementation WDHomeVC
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
+
     [self.view addSubview:self.collectionView];
     [self addGIFImageView];
 }
@@ -133,7 +148,9 @@ typedef void(^FooterClickBlcok)(void);
                 WDWKWebVC *vc = [[WDWKWebVC alloc] init];
                 vc.navigationItem.title = @"关于文都";
                 vc.htmlString = @"https://wxdt.vqune.com/mobile/guanyuwendu/show-1.html";
-                [weakSelf presentViewController:vc animated:YES completion:nil];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+                vc.navigationItem.rightBarButtonItem = nil;
+
             }
                 break;
             case 5:
