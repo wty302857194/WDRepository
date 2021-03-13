@@ -196,7 +196,6 @@ static const  NSInteger maxWidth = 70;
     }
     
     UIScrollView *scrollerView = [[UIScrollView alloc] init];
-    scrollerView.pagingEnabled = YES;
     scrollerView.showsVerticalScrollIndicator = NO;
     scrollerView.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:scrollerView];

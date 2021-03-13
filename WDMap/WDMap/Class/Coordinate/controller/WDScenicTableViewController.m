@@ -120,7 +120,7 @@
     
     self.cell_height = self.detailContentLab.height;
     
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:7 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:6 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 }
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
@@ -146,10 +146,10 @@
     if (indexPath.row == 0) {
         return 250;
     }
-    if (indexPath.row == 6) {
+    if (indexPath.row == 5) {
         return 30;
     }
-    if (indexPath.row == 7) {
+    if (indexPath.row == 6) {
         return self.cell_height;
     }
     return 40;

@@ -55,7 +55,7 @@
     /// 接口调用
     [self getjingdianfenleiRequestData];
     [self getjingdianRequestData:@"" fenleiid:@"0" pageSize:@"" key:@""];
-    
+    [self GetscaleRequestData];
     
 }
 
@@ -126,9 +126,10 @@
 
 /// MARK: 左边按钮
 - (void)addLefMenuBtn {
+    CGFloat width = 22;
     UIButton *lefMenuBtn = [UIButton buttonWithBackgroundImage:@"Coordinate_left_aleart" target:self action:@selector(menuCkick)];
-    lefMenuBtn.frame = CGRectMake(0, 0, 22, 22*88/22.f);
-    lefMenuBtn.center = CGPointMake(15, self.view.centerY-100);
+    lefMenuBtn.frame = CGRectMake(0, 0, width, width*88/22.f);
+    lefMenuBtn.center = CGPointMake(width/2.f, self.view.centerY-100);
     [self.view addSubview:lefMenuBtn];
     self.lefMenutBtn = lefMenuBtn;
 }
@@ -286,6 +287,27 @@
             }
             
             
+        }else {
+            [MBProgressHUD promptMessage:msg inView:self.view];
+        }
+    } failureBlock:^(NSString * _Nonnull description) {
+        [MBProgressHUD promptMessage:description inView:self.view];
+    }];
+}
+/// 获取地图层级
+- (void)GetscaleRequestData {
+    NSDictionary *dic = @{
+        
+    };
+    [TYNetworkTool postRequest:WDGetscaleAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
+        if ([data[@"status"] integerValue] == 1) {
+            NSDictionary *dic = [NSDictionary dictionaryWithDictionary:data];
+
+            CGFloat minLevel = [dic[@"min_scale"] floatValue];
+            CGFloat maxLevel = [dic[@"max_scale"] floatValue];
+            CGFloat moren_scale = [dic[@"moren_scale"] floatValue];
+            [self.mapView setMinZoomLevel:minLevel maxZoomLevel:maxLevel];
+            [self.mapView setZoomLevel:moren_scale animated:YES];
         }else {
             [MBProgressHUD promptMessage:msg inView:self.view];
         }
