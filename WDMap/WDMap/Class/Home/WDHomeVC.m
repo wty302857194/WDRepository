@@ -75,8 +75,10 @@ typedef void(^FooterClickBlcok)(void);
     [super viewDidLoad];
 
     [self.view addSubview:self.collectionView];
-
-    [self addGIFImageView];
+    if (!kDelegate.isRootTabBarVC) {
+        [self addGIFImageView];
+    }
+    
 }
 - (void)addGIFImageView {
     FLAnimatedImageView *gifImageView = [[FLAnimatedImageView alloc] initWithFrame:self.view.bounds];

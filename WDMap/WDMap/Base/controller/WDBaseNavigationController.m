@@ -71,7 +71,7 @@
     
     
     
-    if (!kDelegate.isRootLogin) {
+    if (kDelegate.isRootTabBarVC) {
         UIImage *image = nil;
         if(self.isGif) {
             NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"rightBarItem" ofType:@"gif"];

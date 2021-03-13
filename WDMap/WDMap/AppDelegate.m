@@ -58,14 +58,13 @@
 
 - (void)rootLoginVC {
     [WDGlobal removeMusicPlayView];
-    self.isRootLogin = YES;
     WDBaseNavigationController *nav = [[WDBaseNavigationController alloc] initWithRootViewController:[[WDLoginViewController alloc] init]];
     
     self.window.rootViewController = nav;
 }
 - (void)rootTabBarVC:(NSInteger)index {
     [WDGlobal removeMusicPlayView];
-    self.isRootLogin = NO;
+    self.isRootTabBarVC = YES;
     WDBaseTabBarController *tabVC = [[WDBaseTabBarController alloc] init];
     [tabVC setSelectedIndex:index];
     self.window.rootViewController = tabVC;
