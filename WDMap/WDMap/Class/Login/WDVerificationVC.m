@@ -272,6 +272,7 @@ static NSInteger const edge = 20;
         @"mobile" : self.phoneStr,
         @"openid" : @"",
         @"avatar" : @"",
+        @"nick_name" : @""
     };
     [TYNetworkTool getRequest:WDUserRegisterAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
         if ([data[@"status"] integerValue] == 1) {

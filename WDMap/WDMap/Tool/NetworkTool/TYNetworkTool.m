@@ -89,6 +89,7 @@ static AFNetworkClient *_sharedClient;
 + (void)getRequest:(NSString*)url parameters:(NSDictionary *)parameters successBlock:(void (^)(NSDictionary *data,NSString* msg))successBlock failureBlock:(void (^)(NSString* description))failureBlock
 {
     NSString *URLStr = [NSString stringWithFormat:@"%@%@",URL_main,url];
+    
     if(kWindow) {
         [MBProgressHUD showHUDAddedTo:kWindow animated:YES];
     }

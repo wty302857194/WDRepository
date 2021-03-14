@@ -62,6 +62,7 @@
 
     self.genderStr = @"女";
     self.qianMingLab.text = @"";
+    [self getuserRequestData];
 }
 - (void)tapAvatar {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -101,10 +102,13 @@
 - (void)takePhoto {
     //判断相机是否可用，防止模拟器点击【相机】导致崩溃
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        [self presentViewController:self.imagePickerController animated:YES completion:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:self.imagePickerController animated:YES completion:^{
 
-        }];
+            }];
+        });
+        
     } else {
         NSLog(@"不能使用模拟器进行拍照");
     }
@@ -149,22 +153,25 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
     UIImage *image = [info valueForKey:UIImagePickerControllerEditedImage];
-    double size = image.size.height*image.size.width;
-    UIImage *newImage;
-    if ( size > 120 * 120)
-    {
-        CGRect thumbnailRect = CGRectZero;
-        thumbnailRect.origin = CGPointMake(0, 0);
-        thumbnailRect.size.width  = 120;
-        thumbnailRect.size.height = 120;
-        UIGraphicsBeginImageContext(thumbnailRect.size); // this will crop
-        [image drawInRect:thumbnailRect];
-        newImage = UIGraphicsGetImageFromCurrentImageContext();
-        if(newImage == nil)
-            UIGraphicsEndImageContext();
-    }
-    self.userImageView.image = image;
-    [self UpLoadFileRequestData];
+    /// TODO: 对图片压缩
+//    double size = image.size.height*image.size.width;
+//    UIImage *newImage;
+//    if ( size > 240 * 240)
+//    {
+//        CGRect thumbnailRect = CGRectZero;
+//        thumbnailRect.origin = CGPointMake(0, 0);
+//        thumbnailRect.size.width  = 240;
+//        thumbnailRect.size.height = 240;
+//        UIGraphicsBeginImageContext(thumbnailRect.size); // this will crop
+//        [image drawInRect:thumbnailRect];
+//        newImage = UIGraphicsGetImageFromCurrentImageContext();
+//        if(newImage == nil)
+//            UIGraphicsEndImageContext();
+//    }
+    
+    
+//    self.userImageView.image = image;
+    [self upDateHeadIcon:image];
 }
 
 
@@ -205,26 +212,66 @@
     [self expansion];
 
 }
-#pragma mark - 上传文件
-/// 上传文件
-- (void)UpLoadFileRequestData {
-    NSData *data=  UIImagePNGRepresentation(self.userImageView.image);
-    NSString *headStr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    
+#pragma mark - netWork
+- (void)getuserRequestData {
     NSDictionary *dic = @{
-        @"name" : @"",
-        @"fileValue" : headStr
+        @"token" : @"",
+        @"uid" : [WDGlobal userID],
     };
-    [TYNetworkTool getRequest:WDUpLoadFileAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
+    [TYNetworkTool getRequest:WDgetuserAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
+
         if ([data[@"status"] integerValue] == 1) {
-            
+            [self.userImageView sd_setImageWithURL:[NSURL URLWithString:data[@"data"][@"avatar"]] placeholderImage:PLACE_HOLDER_IMAGE];
         }else {
             [MBProgressHUD promptMessage:msg inView:self.view];
         }
     } failureBlock:^(NSString * _Nonnull description) {
+
         [MBProgressHUD promptMessage:description inView:self.view];
     }];
 }
+#pragma mark - 上传文件
+- (void)upDateHeadIcon:(UIImage *)headerImg
+
+{
+    NSDictionary *dic = @{};
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@&name=123.jpg", URL_main, WDUpLoadFileAPI];
+
+    NSData *imageData = UIImageJPEGRepresentation(headerImg, 0.7);//image为要上传的图片(UIImage)
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [MBProgressHUD showHUDAddedTo:kWindow animated:YES];
+    [manager POST:urlStr parameters:dic headers:@{} constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *fileName = [NSString stringWithFormat:@"%@.jpg",[formatter stringFromDate:[NSDate date]]];
+        //二进制文件，接口key值，文件路径，图片格式
+        [formData appendPartWithFileData:imageData name:@"fileValue" fileName:fileName mimeType:@"image/jpg/png/jpeg"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [MBProgressHUD hideHUD];
+        NSData *jsonData = (NSData *)responseObject;
+        NSError *err;
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                            options:NSJSONReadingMutableContainers
+                                                              error:&err];
+
+        if ([dic[@"status"] integerValue] == 1) {
+            self.headerImageUrl = [NSString stringWithFormat:@"%@%@",@"http://wxdt.vqune.com",dic[@"path"]];
+            [self.userImageView sd_setImageWithURL:[NSURL URLWithString:self.headerImageUrl] placeholderImage:PLACE_HOLDER_IMAGE];
+        }
+        NSLog(@"上传凭证成功:%@",dic);
+        [MBProgressHUD promptMessage:dic[@"msg"]?:@"" inView:self.view];
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"上传图片失败，失败原因是:%@", error);
+        [MBProgressHUD hideHUD];
+    }];
+
+}
+
 /* 修改用户资料
  action:updateuser
  uid：用户ID
@@ -244,10 +291,10 @@
     };
     [TYNetworkTool getRequest:WDupdateuserAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
         if ([data[@"status"] integerValue] == 1) {
-            
-        }else {
-            [MBProgressHUD promptMessage:msg inView:self.view];
+            [self.navigationController popViewControllerAnimated:YES];
         }
+        [MBProgressHUD promptMessage:msg inView:self.view];
+        
     } failureBlock:^(NSString * _Nonnull description) {
         [MBProgressHUD promptMessage:description inView:self.view];
     }];
@@ -261,7 +308,7 @@
         [MBProgressHUD promptMessage:@"请输入您的签名" inView:self.view];
         return;
     }
-    
+    [self updateuserRequestData];
     
 }
 - (void)viewWillLayoutSubviews {

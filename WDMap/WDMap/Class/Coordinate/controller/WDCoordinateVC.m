@@ -377,6 +377,8 @@
     }];
 }
 - (void)addPointAnnotation {
+    [self.mapView removeOverlay:self.mapView.overlays];
+
     [self.mapView removeAnnotations:self.mapView.annotations];
     
     for (WDScenicModel *model in self.scenicArr) {
@@ -461,6 +463,7 @@
     }];
 }
 - (void)addOverlay:(NSArray *)dataArr {
+    [self.mapView removeOverlay:self.mapView.overlays];
     [self.mapView removeAnnotations:self.mapView.annotations];
     
     const NSInteger COUNT = dataArr.count;

@@ -51,8 +51,10 @@ typedef NS_ENUM(NSInteger, WDRectCornerType) {
 + (void)showAlertView:(NSString *)msg;
 // 弹框
 + (void)ty_alertController:(NSString *)title message:(nullable NSString *)message currentContorller:(UIViewController *)controller cancelButtonTitle:(nullable NSString *)cancelButtonTitle sureButtonTitle:(nullable NSString *)sureButtonTitle cancelHandler:(void (^)(void))cancelHandler sureHandler:(void (^)(void))sureHandler;
-// 字典转json
+/// 字典转json
 + (NSString *)ty_jsonStringforDic:(NSDictionary *)dic;
+/// JSON字符串转化为字典
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
 // 修改根视图 到tabbar
 + (void)changeRootVCToTabbarVC;
 // 修改根视图 到LoginVC
