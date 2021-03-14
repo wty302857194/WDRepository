@@ -311,4 +311,9 @@
         [playView clear];
     }];
 }
++ (double)jingdu:(NSString *)str {
+    NSDecimalNumber *decNumber = [NSDecimalNumber decimalNumberWithString:str];
+    NSLog(@"%f",[decNumber doubleValue]);
+    return [decNumber doubleValue];
+}
 @end

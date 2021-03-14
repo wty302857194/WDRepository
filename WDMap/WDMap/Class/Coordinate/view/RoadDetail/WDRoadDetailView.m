@@ -44,12 +44,15 @@
 
 }
 
-- (void)GetxianlutoidRequestData:(NSString *)ID {
+- (void)GetxianlutoidRequestData:(NSString *)ID successBlock:(void (^)(NSArray *dataArr))successBlock {
     NSDictionary *dic = @{
         @"xlid":ID
     };
     [TYNetworkTool getRequest:WDGetxianlutoidAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
         if ([data[@"status"] integerValue] == 1) {
+            self.dataArr = [WDRoadjingdiandataModel mj_objectArrayWithKeyValuesArray:data[@"data"]];
+            
+            successBlock(self.dataArr);
             [self initWithData:data];
             
         }else {
@@ -64,7 +67,6 @@
     self.locationNumLab.text = dic[@"jindianshu"]?:@"";
     self.titleLab.text = dic[@"parenttitle"]?:@"";
     self.contentLab.text = dic[@"title"]?:@"";
-    self.dataArr = [WDRoadjingdiandataModel mj_objectArrayWithKeyValuesArray:dic[@"data"]];
     [self.collectionView reloadData];
 }
 #pragma mark - deleDate

@@ -82,6 +82,9 @@ typedef NS_ENUM(NSInteger, WDRectCornerType) {
 + (void)hiddenMusicPlayView;
 /// 移除播放器
 + (void)removeMusicPlayView;
+
+/// 精度问题
++ (CGFloat)jingdu:(NSString *)str;
 @end
 
 NS_ASSUME_NONNULL_END

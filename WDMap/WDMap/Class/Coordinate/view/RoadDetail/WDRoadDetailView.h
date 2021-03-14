@@ -22,7 +22,8 @@ typedef void(^LocationBlock)(CGPoint point);
 
 @property (nonatomic, copy) LocationBlock  locationBlock;
 
-- (void)GetxianlutoidRequestData:(NSString *)ID;
+//- (void)GetxianlutoidRequestData:(NSString *)ID;
+- (void)GetxianlutoidRequestData:(NSString *)ID successBlock:(void (^)(NSArray *dataArr))successBlock;
 @end
 
 NS_ASSUME_NONNULL_END

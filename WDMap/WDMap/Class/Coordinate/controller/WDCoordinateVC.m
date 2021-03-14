@@ -16,6 +16,37 @@
 #import "WDScenicClassifyModel.h"
 #import "WDScenicModel.h"
 
+
+@interface QRouteOverlay : QPolyline
+
+- (id)initWithCoordinates:(CLLocationCoordinate2D *)coords count:(NSUInteger)count arrLine:(NSArray<QSegmentStyle*> *)arrLine;
+
+// 保存折线每条线段的分段信息
+@property(nonatomic, strong) NSMutableArray<QSegmentStyle *>* arrLine;
+
+@end
+
+@implementation QRouteOverlay
+
+- (id)initWithCoordinates:(CLLocationCoordinate2D *)coordinateArray count:(NSUInteger)count arrLine:(NSArray<QSegmentStyle *> *)arrLine
+{
+    if (count == 0 || arrLine.count == 0) {
+        return nil;
+    }
+    
+    if (self = [super initWithCoordinates:coordinateArray count:count])
+    {
+        self.arrLine = [NSMutableArray array];
+        [self.arrLine addObjectsFromArray:arrLine];
+    }
+    
+    return self;
+}
+
+@end
+
+
+
 @interface WDCoordinateVC ()<QMapViewDelegate,TencentLBSLocationManagerDelegate>
 
 @property (readwrite, nonatomic, strong) TencentLBSLocationManager *locationManager;
@@ -36,6 +67,8 @@
 /// 是否是通过搜索获取的数据
 @property (nonatomic, assign) BOOL isSearch;
 
+//@property (nonatomic, strong) NSMutableArray<QPolyline *> *lines;
+
 @end
 
 @implementation WDCoordinateVC
@@ -44,6 +77,7 @@
     [super viewDidLoad];
     self.navigationItem.title = @"文都地图";
     self.edgesForExtendedLayout = UIRectEdgeNone;
+//    self.lines = [NSMutableArray array];
     
     /// 初始化ui
     [self addBarButtonItem];
@@ -56,7 +90,6 @@
     [self getjingdianfenleiRequestData];
     [self getjingdianRequestData:@"" fenleiid:@"0" pageSize:@"" key:@""];
     [self GetscaleRequestData];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -76,7 +109,11 @@
 - (void)initMap {
     //初始化地图实例
     self.mapView = [[QMapView alloc] initWithFrame:self.view.bounds];
-    [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(32.083581, 118.792624) animated:YES];
+    self.mapView.shows3DBuildings = NO;
+    self.mapView.overlookingEnabled = NO;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(32.083581, 118.792624) animated:YES];
+    });
     //接受地图的delegate回调
     self.mapView.delegate = self;
     [self.mapView setShowsUserLocation:YES];
@@ -90,7 +127,7 @@
 }
 
 - (void)initUI {
-
+    
     float width = 80;
     for (int i=0; i<2; i++) {
         UIButton *clickBtn = [UIButton buttonWithBackgroundImage:[NSString stringWithFormat:@"recommend_road%d",i] target:self action:@selector(tagClick:)];
@@ -102,7 +139,7 @@
     self.searchView.hidden = NO;
     
     [self addLefMenuBtn];
-
+    
 }
 - (void)tagClick:(UIButton *)btn {
     if (btn.tag == 1000) {
@@ -140,13 +177,13 @@
     if (self.menuArr && self.menuArr.count > 0) {
         [self.menuView show];
     }
-
+    
 }
 #pragma mark - delegate
 - (QAnnotationView *)mapView:(QMapView *)mapView viewForAnnotation:(id<QAnnotation>)annotation {
     if ([annotation isKindOfClass:[QPointAnnotation class]]) {
         static NSString *annotationIdentifier = @"pointAnnotation";
-//        QPinAnnotationView *pinView = (QPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
+        //        QPinAnnotationView *pinView = (QPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
         QAnnotationView *pinView = (QAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
         if (pinView == nil) {
             pinView = [[QAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationIdentifier];
@@ -170,6 +207,26 @@
     }
     
 }
+
+- (QOverlayView *)mapView:(QMapView *)mapView viewForOverlay:(id<QOverlay>)overlay
+{
+    if ([overlay isKindOfClass:[QRouteOverlay class]])
+    {
+        QRouteOverlay *ro = (QRouteOverlay*)overlay;
+        QTexturePolylineView *polylineRender = [[QTexturePolylineView alloc] initWithPolyline:overlay];
+        
+        // 设置分段样式
+        polylineRender.segmentStyle = ro.arrLine;
+        polylineRender.lineWidth = 10;
+        // 开启箭头绘制
+        polylineRender.drawSymbol = YES;
+        // 设置箭头之间的间距
+        polylineRender.symbolGap = 52;
+        return polylineRender;
+    }
+    
+    return nil;
+}
 #pragma mark - 定位
 - (void)configLocationManager
 {
@@ -182,10 +239,10 @@
     [self.locationManager setPausesLocationUpdatesAutomatically:NO];
     
     // 需要后台定位的话，可以设置此属性为YES。
-//    [self.locationManager setAllowsBackgroundLocationUpdates:YES];
+    //    [self.locationManager setAllowsBackgroundLocationUpdates:YES];
     
     // 如果需要POI信息的话，根据所需要的级别来设定，定位结果将会根据设定的POI级别来返回，如：
-//    [self.locationManager setRequestLevel:TencentLBSRequestLevelName];
+    //    [self.locationManager setRequestLevel:TencentLBSRequestLevelName];
     
     // 申请的定位权限，得和在info.list申请的权限对应才有效
     CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
@@ -201,7 +258,7 @@
      ^(TencentLBSLocation *location, NSError *error) {
         NSLog(@"%@, %@, %@", location.location, location.name, location.address);
         [weakSelf.mapView setCenterCoordinate:location.location.coordinate animated:YES];
-
+        
     }];
 }
 
@@ -306,7 +363,7 @@
     [TYNetworkTool postRequest:WDGetscaleAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
         if ([data[@"status"] integerValue] == 1) {
             NSDictionary *dic = [NSDictionary dictionaryWithDictionary:data];
-
+            
             CGFloat minLevel = [dic[@"min_scale"] floatValue];
             CGFloat maxLevel = [dic[@"max_scale"] floatValue];
             CGFloat moren_scale = [dic[@"moren_scale"] floatValue];
@@ -333,7 +390,7 @@
 - (WDSearchHistoryView *)searchView {
     if (!_searchView) {
         _searchView = [[WDSearchHistoryView alloc] initWithFrame:CGRectMake(40, 20, kSCREEN_WIDTH - 80, 40)];
-       
+        
         [self.view addSubview:_searchView];
         kWEAK_SELF;
         _searchView.textChangeBlock = ^(NSString * _Nonnull text) {
@@ -342,7 +399,7 @@
         };
         _searchView.selectItemBlock = ^(WDScenicModel * _Nonnull model) {
             weakSelf.searchView.frame = CGRectMake(40, 20, kSCREEN_WIDTH - 80, 40);
-
+            
             [weakSelf.mapView setCenterCoordinate:CLLocationCoordinate2DMake([model.jingdu floatValue], [model.weidu floatValue]) animated:YES];
         };
     }
@@ -388,7 +445,8 @@
             [weakSelf.roadView removeFromSuperview];
             weakSelf.roadView = nil;
             weakSelf.roadDetailView.hidden = NO;
-            [weakSelf.roadDetailView GetxianlutoidRequestData:xlid];
+            
+            [weakSelf roadDetailView:xlid];
         };
         [_roadView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.offset(0);
@@ -396,7 +454,41 @@
     }
     return _roadView;
 }
-
+- (void)roadDetailView:(NSString *)xlid {
+    kWEAK_SELF;
+    [self.roadDetailView GetxianlutoidRequestData:xlid successBlock:^(NSArray * _Nonnull dataArr) {
+        [weakSelf addOverlay:dataArr];
+    }];
+}
+- (void)addOverlay:(NSArray *)dataArr {
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    
+    const NSInteger COUNT = dataArr.count;
+    CLLocationCoordinate2D polylineCoords[COUNT];
+    for (int i=0; i<COUNT; i++) {
+        WDRoadjingdiandataModel *model = dataArr[i];
+        polylineCoords[i].latitude = [WDGlobal jingdu:model.jingdu];
+        polylineCoords[i].longitude = [WDGlobal jingdu:model.weidu];
+        
+        
+        QPointAnnotation *pointAnnotation = [[QPointAnnotation alloc] init];
+        pointAnnotation.coordinate = CLLocationCoordinate2DMake([model.jingdu floatValue], [model.weidu floatValue]);
+        // 将点标记添加到地图中
+        [self.mapView addAnnotation:pointAnnotation];
+    }
+    
+    NSMutableArray* routeLineArray = [NSMutableArray array];
+    for (int i = 0; i < COUNT-1; i++)
+    {
+        QSegmentStyle *subLine = [[QSegmentStyle alloc] init];
+        subLine.startIndex = i;
+        subLine.endIndex  = i+1;
+        subLine.colorImageIndex = 9;///arc4random() % 6;
+        [routeLineArray addObject:subLine];
+    }
+    QRouteOverlay *polyline = [[QRouteOverlay alloc] initWithCoordinates:polylineCoords count:COUNT arrLine:routeLineArray];
+    [self.mapView addOverlay:polyline];
+}
 - (WDRoadDetailView *)roadDetailView {
     if (!_roadDetailView) {
         _roadDetailView = [WDRoadDetailView shareInstance];
@@ -405,7 +497,7 @@
         _roadDetailView.locationBlock = ^(CGPoint point) {
             
             [weakSelf.mapView setCenterCoordinate:CLLocationCoordinate2DMake(point.x, point.y) animated:YES];
-
+            
         };
         [_roadDetailView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.offset(0);
@@ -413,4 +505,11 @@
     }
     return _roadDetailView;
 }
+
+
 @end
+
+
+
+
+
