@@ -75,7 +75,9 @@
             break;
         case 5:
         {
-            
+            kDelegate.isRootTabBarVC = NO;
+            [WDUtil removeAllInfo];
+            [kDelegate rootLoginVC];
         }
             break;
         default:

@@ -70,7 +70,7 @@ static NSInteger const edge = 20;
 //    [nameBackView1 addSubview:time];
 //    self.currentTimeLab = timeLab;
     
-    UILabel *timeLab = [[UILabel alloc] initWithFrame:CGRectMake(nameBackView1.width - 150-10, 12, 150, 30)];
+    UILabel *timeLab = [[UILabel alloc] initWithFrame:CGRectMake(nameBackView1.width - 150-10, 9, 150, 30)];
     timeLab.text = @"获取验证码";
     timeLab.textColor = hexColor(F550CD);
     timeLab.userInteractionEnabled = YES;
@@ -131,17 +131,20 @@ static NSInteger const edge = 20;
     [self addTimer];
 }
 - (void)addTimer {
-    
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
     NSTimer *timer = [NSTimer timerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
         if (self.time<=0) {
             self.timeLab.text = @"重发发送";
             [timer invalidate];
-            self.timeLab.userInteractionEnabled = NO;
+            self.timeLab.userInteractionEnabled = YES;
 
         }else {
             self.time--;
             self.timeLab.text = [NSString stringWithFormat:@"获取验证码%lds",(long)self.time];
-            self.timeLab.userInteractionEnabled = YES;
+            self.timeLab.userInteractionEnabled = NO;
 
         }
     }];
@@ -220,6 +223,7 @@ static NSInteger const edge = 20;
  action:czmima
  mobile：手机号码   （手机号码和用户ID必须传递其中一个）
  uid：用户ID   （手机号码和用户ID必须传递其中一个）
+ pwd：密码
 
  */
 - (void)czmimaRequestData {
@@ -227,7 +231,7 @@ static NSInteger const edge = 20;
         @"mobile" : self.phoneStr,
         @"uid" : [WDGlobal userID]
     };
-    [TYNetworkTool getRequest:WDGetjingdianAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
+    [TYNetworkTool getRequest:WDczmimaAPI parameters:dic successBlock:^(id  _Nonnull data, NSString * _Nonnull msg) {
         if ([data[@"status"] integerValue] == 1) {
         }else {
             [MBProgressHUD promptMessage:msg inView:self.view];

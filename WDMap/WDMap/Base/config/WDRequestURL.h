@@ -63,6 +63,9 @@ static NSString * const WDUpLoadFileAPI  = @"?action=UpLoadFile";
 /// 修改用户资料
 static NSString * const WDupdateuserAPI  = @"?action=updateuser";
 
+/// 重置密码
+static NSString * const WDczmimaAPI  = @"?action=czmima";
+
 //MARK: ------------------------------ 关于文都 ------------------------------
 /// Getgywdurl
 static NSString * const WDGetgywdurlAPI  = @"?action=Getgywdurl";

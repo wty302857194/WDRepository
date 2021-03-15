@@ -23,7 +23,9 @@ static NSInteger const cellHeight = 40;
         self.layer.shadowColor = [UIColor blackColor].CGColor;
         self.layer.shadowOffset = CGSizeMake(0, 3);
         self.layer.shadowOpacity = 0.8;
-        [self setCornerRadius:10];
+        self.layer.cornerRadius = 10;
+//        self.layer.masksToBounds = YES;
+//        [self setCornerRadius:10];
         [self initUI];
     }
     return self;
@@ -31,11 +33,12 @@ static NSInteger const cellHeight = 40;
 - (void)initUI {
     
     
-    WDBaseView *searchBackView = [[WDBaseView alloc] initWithFrame:CGRectMake(0, 0, self.width, 40)];
+    UIView *searchBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, 40)];
     [self addSubview:searchBackView];
     
     UITextField *phoneTF = [[UITextField alloc] initWithFrame:CGRectMake(10, 5, self.width-20-30, 30)];
     phoneTF.placeholder = @"请输入您想搜索的景点";
+    phoneTF.keyboardType = UIKeyboardTypeDefault;
     phoneTF.font = [UIFont systemFontOfSize:15];
     [phoneTF addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
     [searchBackView addSubview:phoneTF];

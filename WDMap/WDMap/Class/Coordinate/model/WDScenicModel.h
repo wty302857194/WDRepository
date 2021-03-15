@@ -9,6 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 /*
+
  Json数据
  1.ID：数据ID
  2.category_id：分类ID
@@ -27,8 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
  15.lianxifangshi：联系方式
  16.jingdiantouxiang：景点头像
  17.yanse 颜色
- 18.wenxuerexianshifouxianshi 文学热线是否显示
+ 18.wenxuerexianshifouxianshi 文学热线是否显示（1代表显示，0代表不显示）
  19.jianzhutupian 景点图片
+ 20.albums详情轮播图
+ 21.zhuyaozuobiao 主要坐标   1表示是 0表示否
+ 22.ciyaozuobiao 次要坐标   1表示是 0表示否
  其他数据不用理会
  */
 @interface WDScenicModel : WDBaseModel
@@ -51,6 +55,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSArray * albums;
 @property (nonatomic, copy) NSDictionary * fields;/// jingdianjieshao
 @property (nonatomic, copy) NSString * scsj;
+@property (nonatomic, copy) NSString * zhuyaozuobiao;
+@property (nonatomic, copy) NSString * ciyaozuobiao;
+
 @end
 
 @interface WDAlbumsModel : WDBaseModel
